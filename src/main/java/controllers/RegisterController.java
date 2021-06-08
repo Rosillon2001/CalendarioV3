@@ -16,9 +16,11 @@ public class RegisterController {
 	}
 	
 	public void registro (String username, String pass) {
-		Properties prop=new Properties();
-		//PR.prop.getProperty("insertUser");
-		System.out.println("Usuario "+username+" Passwd "+pass);
+		//Properties prop=new Properties();
+		System.out.println(PR.add());
+		DB.regUsuario(PR.add(), DB.userId(), username, pass);
+		System.out.print("resgistrando user");
 	}
+	
 
 }

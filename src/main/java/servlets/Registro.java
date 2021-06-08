@@ -46,15 +46,29 @@ public class Registro extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter s=response.getWriter();
 		
-		s.print("<html><body>");
-		s.print(request.getParameter("nombre"));
-		s.print(request.getParameter("contra"));
-		s.print("</body></html>");
-		RC.registro(request.getParameter("nombre"), request.getParameter("contra"));
+		//s.print("<html><body>");
+		String username=request.getParameter("nombre");
+		String pass=request.getParameter("contra");
+		String pass2=request.getParameter("contra2");
+		
+		System.out.println(pass+" "+ pass2+ " "+ "->"+pass.equals(pass2));
+		
+		if(pass.equals(pass2)){
+			RC.registro(username, pass);
+			RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
+			rd.forward(request, response);
+		}else {
+			RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
+			rd.forward(request, response);
+			s.print("<script>window.alert('Las contraseñas no coinciden, intente de nuevo')</script>");
+			
+		}		
+		
+	
 		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/a.html");
-		rd.forward(request, response);
+		/*RequestDispatcher rd=request.getRequestDispatcher("/a.html");
+		rd.forward(request, response);*/
 		
 	}
 

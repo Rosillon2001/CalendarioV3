@@ -9,8 +9,8 @@ public class PropertiesReader {
 	private FileInputStream fin;
 	public Properties prop;
 	
-	private String DBdata[];
-	private String DBQuery[];
+	private String DBadd;
+	private String DBselect;
 	
 	/*public static void main (String args[]) {
 		System.out.println(propR.prop.getProperty("user"));
@@ -23,9 +23,9 @@ public class PropertiesReader {
 			prop=new Properties();
 			prop.load(fin);
 			
-			DBdata= new String[] { prop.getProperty("Driver"), prop.getProperty("UrlDB"), prop.getProperty("user"), prop.getProperty("pass")};
+			DBadd= new String(prop.getProperty("insertUser"));
 			
-			DBQuery= new String[] { prop.getProperty("selectUser"), prop.getProperty("insertUser")};
+			DBselect= new String (prop.getProperty("selectUser"));
 			
 		}catch(Exception e) {
 			System.out.println("Error "+e.getMessage());
@@ -36,12 +36,12 @@ public class PropertiesReader {
 		return propR;
 	}
 	
-	public String[] getData() {
-		return this.DBdata;
+	public String add() {
+		return this.DBadd;
 	}
 	
-	public String[] getQuery() {
-		return this.DBQuery;
+	public String select() {
+		return this.DBselect;
 	}
 	
 	public String getVal(String valor) {
