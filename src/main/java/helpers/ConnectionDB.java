@@ -19,9 +19,6 @@ public class ConnectionDB {
 	private ResultSet rs;
 	
 	private static ConnectionDB DB=new ConnectionDB();
-
-
-	
 	private PropertiesReader PR= PropertiesReader.getInstances();
 	Properties prop=new Properties();
 	
