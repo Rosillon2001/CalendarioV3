@@ -3,16 +3,18 @@
   <display-name>CalendarioV2</display-name>
   <welcome-file-list>
     <welcome-file>Register.html</welcome-file>
+   	<welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
 
   </welcome-file-list>
   
   <servlet>
   	<servlet-name>Registro</servlet-name>
-  	<servlet-class>Registro</servlet-class>
+  	<servlet-class>CalendarioV2.server.Registro</servlet-class>
   </servlet>  
-  <servlet-mapping>
-	    <servlet-name>ServletMaven</servlet-name>
-	    <url-pattern>/ServletMaven</url-pattern>
-    </servlet-mapping>
   
 </web-app>
