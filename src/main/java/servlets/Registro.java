@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,8 +53,8 @@ public class Registro extends HttpServlet {
 		RC.registro(request.getParameter("nombre"), request.getParameter("contra"));
 		
 		
-		/*RequestDispatcher rd=request.getRequestDispatcher("/a.html");
-		rd.forward(request, response);*/
+		RequestDispatcher rd=request.getRequestDispatcher("/a.html");
+		rd.forward(request, response);
 		
 	}
 
