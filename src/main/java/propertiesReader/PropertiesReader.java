@@ -18,7 +18,7 @@ public class PropertiesReader {
 	
 	public PropertiesReader() {
 		try {
-			fin=new FileInputStream("C:\\Users\\rosil\\eclipse-workspace2\\CalendarioV2\\src\\main\\java\\propertiesReader\\Data.properties");
+			fin=new FileInputStream("C:\\Users\\rosil\\eclipse-workspace2\\CalendarioV3\\src\\main\\java\\propertiesReader\\Data.properties");
 			
 			prop=new Properties();
 			prop.load(fin);

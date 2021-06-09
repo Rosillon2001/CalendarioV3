@@ -57,9 +57,9 @@ public class Registro extends HttpServlet {
 		
 		if(pass.equals(pass2)){
 			RC.registro(username, pass);
-			//RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
-			//rd.include(request, response);
-			response.sendRedirect("/CalendarioV2/Login.html");
+			/*RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
+			rd.include(request, response);*/
+			response.sendRedirect("/CalendarioV3/Login.html");
 		}else {
 			//RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
 			//rd.forward(request, response);

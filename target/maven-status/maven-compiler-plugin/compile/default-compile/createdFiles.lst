@@ -1,0 +1,5 @@
+controllers\RegisterController.class
+helpers\ConnectionDB.class
+servlets\Registro.class
+servlets\Login.class
+propertiesReader\PropertiesReader.class
