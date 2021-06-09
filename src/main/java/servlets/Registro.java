@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import controllers.RegisterController;
 /**
  * Servlet implementation class Registro
  */
+@MultipartConfig()
 @WebServlet("/Registro")
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -58,8 +60,8 @@ public class Registro extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
 			rd.forward(request, response);
 		}else {
-			RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
-			rd.forward(request, response);
+			//RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
+			//rd.forward(request, response);
 			s.print("<script>window.alert('Las contraseñas no coinciden, intente de nuevo')</script>");
 			
 		}		
