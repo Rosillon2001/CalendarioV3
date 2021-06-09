@@ -1,4 +1,0 @@
-controllers\RegisterController.class
-helpers\ConnectionDB.class
-servlets\Registro.class
-propertiesReader\PropertiesReader.class
