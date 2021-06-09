@@ -15,7 +15,7 @@
   
   <servlet>
   	<servlet-name>registro</servlet-name>
-  	<servlet-class>servlets.Registro</servlet-class>
+  	<servlet-class>operation.Registro</servlet-class>
   </servlet>
   
 </web-app>
