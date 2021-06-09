@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import propertiesReader.PropertiesReader;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 
 
@@ -25,20 +22,15 @@ public class ConnectionDB {
 	private PropertiesReader PR= PropertiesReader.getInstances();
 	Properties prop=new Properties();
 	
-	private Connection ConnectionDB() throws ClassNotFoundException {
+	private ConnectionDB() {
 		try {
-			URI dbUri = new URI(System.getenv(PR.prop.getProperty("UrlDB")));
-
-		    String username = dbUri.getUserInfo().split(":")[0];
-		    String password = dbUri.getUserInfo().split(":")[1];
-		    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
-		    return DriverManager.getConnection(dbUrl, username, password);
+			Class.forName(PR.prop.getProperty("Driver"));
+			this.conn=DriverManager.getConnection(PR.prop.getProperty("UrlDB"), PR.prop.getProperty("user"), PR.prop.getProperty("pass"));
+			System.out.print("Conexion establecida con la DB");
 			
-		}catch(SQLException | URISyntaxException e) {
+		}catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
 	//patron singleton
