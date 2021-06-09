@@ -1,0 +1,91 @@
+@charset "ISO-8859-1";
+
+#Login{
+	font-size:18px;
+	color:black;
+	border: 2px;
+	border-radius:1em;
+	padding:10px;
+	background-color:#f19d94;
+	font-style:helvetica;
+	text-decoration:none;
+	margin-right:10px;
+}
+
+#Register{
+	font-size:18px;
+	border: 2px;
+	border-radius:1em;
+	padding:10px;
+	background-color:#f19d94;
+	font-style:helvetica;
+	color:black;
+	text-decoration:none;
+	
+}
+
+#banner{
+	border-radius:1em;
+	background: linear-gradient(45deg,#fad964, #fac364, rgb(128, 255, 128)); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
+    margin-bottom:10px;
+    width:auto;
+    height:250px;
+    overflow:hidden;
+}
+
+#title{
+	float:none;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:120px;
+	font-style: italic;
+	font-size:48px;
+}
+
+#buttons{
+	float: right;
+	margin-right: 50px;
+}
+.info{
+	border-radius:1em;
+	background: linear-gradient(150deg,#d44856,#d45448, #d47248, #d49c48 ); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
+    margin-bottom:10px;
+    width:auto;
+    height:500px;
+    padding-left:10px;
+    padding-top:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+    float: left;
+}
+#cont1{
+	font-size:24px;
+	font-style:italic;
+	font-weight:bold;
+	float:left;
+}
+
+#cont2{
+	font-size:24px;
+	font-style:helvetica;
+	font-weight:bold;
+	float:left;
+}
+.logo{
+	float:left;
+	height:250px;
+	width:500px;
+	margin-top:15px;
+	margin-bottom:15px;
+	margin-left: 15px;
+}
+
+@keyframes Bg {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}

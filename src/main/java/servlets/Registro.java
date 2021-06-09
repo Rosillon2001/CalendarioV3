@@ -67,9 +67,7 @@ public class Registro extends HttpServlet {
 			
 		}		
 		
-	
-		
-		
+			
 		/*RequestDispatcher rd=request.getRequestDispatcher("/a.html");
 		rd.forward(request, response);*/
 		

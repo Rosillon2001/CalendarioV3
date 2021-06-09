@@ -29,7 +29,7 @@ html{
 	border-radius:1em;
 	background: linear-gradient(45deg,#fad964, #fac364, rgb(128, 255, 128)); 
 	background-size: 800% 100%;
-    animation: Bg 10s ease infinite;
+    animation: Bg 20s ease infinite;
     margin-bottom:10px;
     width:auto;
     height:auto;
