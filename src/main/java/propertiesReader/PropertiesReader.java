@@ -1,5 +1,6 @@
 package propertiesReader;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -18,10 +19,11 @@ public class PropertiesReader {
 	
 	public PropertiesReader() {
 		try {
-			fin=new FileInputStream("C:\\Users\\rosil\\eclipse-workspace2\\CalendarioV3\\src\\main\\java\\propertiesReader\\Data.properties");
 			
+			//fin=new FileInputStream("\\CalendarioV3\\src\\main\\java\\propertiesReader\\Data.properties");
+			System.out.print(fin);
 			prop=new Properties();
-			prop.load(fin);
+			prop.load(getClass().getResourceAsStream("/propertiesReader/Data.properties"));
 			
 			DBadd= new String(prop.getProperty("insertUser"));
 			
