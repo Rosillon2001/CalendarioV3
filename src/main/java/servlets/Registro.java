@@ -59,7 +59,7 @@ public class Registro extends HttpServlet {
 			RC.registro(username, pass);
 			/*RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
 			rd.include(request, response);*/
-			response.sendRedirect("/CalendarioV3/Login.html");
+			response.sendRedirect("Login.html");
 		}else {
 			//RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
 			//rd.forward(request, response);
