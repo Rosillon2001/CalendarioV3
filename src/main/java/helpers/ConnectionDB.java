@@ -17,6 +17,7 @@ public class ConnectionDB {
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+
 	
 	private static ConnectionDB DB=new ConnectionDB();
 	private PropertiesReader PR= PropertiesReader.getInstances();
@@ -72,6 +73,44 @@ public void regUsuario(String query, int id, String username, String pass ) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	
+}
+
+//obtener el usuario si esta registrado en la DB
+public String getUsuario(String username) {
+	String user = null; String pass = null;
+	PropertiesReader PR= PropertiesReader.getInstances();
+	Properties prop=new Properties();
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery(PR.prop.getProperty("selectUser")+"'"+username+"'");
+		while(rs.next()) {
+		user= rs.getString("nombre_usuario");
+		pass=rs.getString("clave");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	
+	return user;
+}
+
+//Obtener la clave en la DB para la validacion
+public String getClave(String username) {
+	String pass = null;
+	PropertiesReader PR= PropertiesReader.getInstances();
+	Properties prop=new Properties();
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery(PR.prop.getProperty("selectUser")+"'"+username+"'");
+		while(rs.next()) {
+		pass=rs.getString("clave");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	
+	return pass;
 	
 }
 

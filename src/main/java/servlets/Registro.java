@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import helpers.Hashing;
 import controllers.RegisterController;
-
+import helpers.Auth;
 /**
  * Servlet implementation class Registro
  */
@@ -22,6 +23,8 @@ public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	RegisterController RC=new RegisterController();
+	Hashing Hash=new Hashing();
+	Auth auth=new Auth();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,12 +53,15 @@ public class Registro extends HttpServlet {
 		
 		//s.print("<html><body>");
 		String username=request.getParameter("nombre");
+		boolean userExists=auth.userExists(username);
 		String pass=request.getParameter("contra");
 		String pass2=request.getParameter("contra2");
 		
-		System.out.println(pass+" "+ pass2+ " "+ "->"+pass.equals(pass2));
+		//System.out.println(pass+" "+ pass2+ " "+ "->"+pass.equals(pass2));
 		
-		if(pass.equals(pass2)){
+		//Si la contraseñas coinciden y el usuario no existe, entonces se registra
+		if(pass.equals(pass2) && userExists==false){
+			pass=Hash.getHash(pass);
 			RC.registro(username, pass);
 			/*RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
 			rd.include(request, response);*/
@@ -63,8 +69,12 @@ public class Registro extends HttpServlet {
 		}else {
 			//RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
 			//rd.forward(request, response);
-			s.print("<script>window.alert('Las contraseñas no coinciden, intente de nuevo')</script>");
-			
+			if(pass.equals(pass2)==false) {
+				s.print("<script>window.alert('Las contraseñas no coinciden, intente de nuevo')</script>");
+			}
+			if(userExists==true) {
+				s.print("<script>window.alert('El nombre de usuario ya existe, intente de nuevo')</script>");
+			}
 		}		
 		
 			

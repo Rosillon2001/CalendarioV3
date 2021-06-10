@@ -1,12 +1,7 @@
 CREATE TABLE Usuario (
 	id_usuario numeric(15) primary key,
 	nombre_usuario varchar(30),
-	clave varchar(30)
-);
-CREATE TABLE Usuario (
-	id_usuario numeric(15) primary key,
-	nombre_usuario varchar(30),
-	clave varchar(30)
+	clave varchar(150)
 );
 
 CREATE TABLE Calendario (
@@ -26,6 +21,7 @@ Create table Actividad(
 	id_actividad numeric(15) primary key, 
 	nombre_actividad varchar(50),
 	descripcion_actividad varchar(150),
+	color_actividad varchar(80),
 	fecha_actividad date,
 	hora_inicio varchar(20),
 	hora_fin varchar(20),

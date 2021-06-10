@@ -1,16 +1,5 @@
+@charset "ISO-8859-1";
 
-html{
-	background: linear-gradient(145deg,white);
-    background-size: 2000% 100%;
-    animation: Bg1 50s ease infinite;
-    font-style:italic;
-    color:#000000;
-}
-@keyframes Bg1{
-    0% {background-position: 0% 25%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
 .registro{
 	font-style:helvetica;
 	font-size:28px;
@@ -55,7 +44,16 @@ html{
 	text-align:center;
 }
 .init{
-	font-size:28px;
+	margin-top:50px;
+	font-size:36px;
+	font-style:italic;
 	font-weight:bold;
 	text-align:center;
+}
+.noAcc{
+	margin-top: 20px;
+	text-align:center;
+	font-style:italic;
+	font-weight:bold;
+	font-size:18px;
 }

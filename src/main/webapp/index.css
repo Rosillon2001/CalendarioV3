@@ -26,7 +26,7 @@
 
 #banner{
 	border-radius:1em;
-	background: linear-gradient(45deg,#fad964, #fac364, rgb(128, 255, 128)); 
+	background: linear-gradient(45deg,#fad964, #fac364, #fad964); 
 	background-size: 800% 100%;
     animation: Bg 20s ease infinite;
     margin-bottom:10px;
@@ -48,7 +48,7 @@
 	float: right;
 	margin-right: 50px;
 }
-.info{
+#info1{
 	border-radius:1em;
 	background: linear-gradient(150deg,#d44856,#d45448, #d47248, #d49c48 ); 
 	background-size: 800% 100%;
@@ -62,18 +62,34 @@
     padding-bottom:10px;
     float: left;
 }
+#info2{
+	text-align:center;
+	border-radius:1em;
+	background: linear-gradient(150deg,#d44856,#d45448, #d47248, #d49c48 ); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
+    margin-bottom:10px;
+    width:auto;
+    height:500px;
+    padding-left:10px;
+    padding-top:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+    float: right;
+}
 #cont1{
 	font-size:24px;
 	font-style:italic;
 	font-weight:bold;
 	float:left;
+	margin-left:10px;
 }
 
 #cont2{
 	font-size:24px;
-	font-style:helvetica;
+	font-style:italic;
 	font-weight:bold;
-	float:left;
+	float:right;
 }
 .logo{
 	float:left;

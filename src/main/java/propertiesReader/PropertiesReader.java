@@ -21,7 +21,6 @@ public class PropertiesReader {
 		try {
 			
 			//fin=new FileInputStream("\\CalendarioV3\\src\\main\\java\\propertiesReader\\Data.properties");
-			System.out.print(fin);
 			prop=new Properties();
 			prop.load(getClass().getResourceAsStream("/propertiesReader/Data.properties"));
 			
