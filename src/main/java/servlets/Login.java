@@ -19,7 +19,7 @@ import helpers.Hashing;
  * Servlet implementation class Login
  */
 @MultipartConfig()
-@WebServlet("/Login")
+@WebServlet("/public/views/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 2L;
        
