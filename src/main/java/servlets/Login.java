@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
 		HttpSession session=request.getSession();
 		try {
 			if(LC.Login(request,username, pass) && session.getAttribute(username)==null) {
-				response.sendRedirect("a.html");
+				response.sendRedirect("/public/views/a.html");
 			}else {
 				s.print("<script>window.alert('Las credenciales no coinciden con los datos en nuestro registro')</script>");
 				response.sendRedirect("/public/views/Login.html");
