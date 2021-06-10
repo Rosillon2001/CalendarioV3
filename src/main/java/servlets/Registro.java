@@ -19,6 +19,7 @@ import helpers.Auth;
  */
 @MultipartConfig()
 @WebServlet("/public/views/Registro")
+
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
