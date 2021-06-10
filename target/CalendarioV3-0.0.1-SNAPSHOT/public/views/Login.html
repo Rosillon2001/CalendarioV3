@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/public/styles/Login.css" rel="stylesheet" type="text/css">
+<meta charset="ISO-8859-1">
+<title>CalendStar Login</title>
+</head>
+<body>
+<div class="head">
+ <img src="/public/assets/images/CalendStar.png" class='logo'>	
+</div>
+
+	<div class="init">
+		Ingrese sus credenciales 
+	</div>
+	
+<div class="registro">
+<form action="Login" method="post">
+	
+	Nombre de usuario: <br>
+	<input type="text" name='nombre'class='input'><br>
+	<br>
+	Constraseña:<br>
+	 <input type="password" name='contra'class='input'><br>
+	<br>
+	<input type='submit' value='Iniciar Sesión' class='boton'>
+</form></div>
+
+<div class="noAcc">
+	¿No tiene una cuenta? <a href="/public/views/Register.html">Regístrese</a>
+</div>
+</body>
+</html>

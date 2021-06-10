@@ -1,0 +1,61 @@
+
+html{
+	background: linear-gradient(145deg,white);
+    background-size: 2000% 100%;
+    animation: Bg1 50s ease infinite;
+    font-style:italic;
+    color:#000000;
+}
+@keyframes Bg1{
+    0% {background-position: 0% 25%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+.registro{
+	font-style:helvetica;
+	font-size:28px;
+	text-align:center;
+	margin-top:100px;
+	margin-bottom:auto;
+}
+.logo{
+	height:100px;
+	width:300px;
+	margin-top:15px;
+	margin-bottom:15px;
+	margin-left: 15px;
+}
+.head{
+	border-radius:1em;
+	background: linear-gradient(45deg,#fad964, #fac364, rgb(128, 255, 128)); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
+    margin-bottom:10px;
+    width:auto;
+    height:auto;
+    
+}
+@keyframes Bg {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.boton{
+	font-style:helvetica;
+	font-size:20px;
+	color: #000000;
+}
+
+.input{
+	border-radius:1em;
+	font-style:helvetica;
+	color:black;
+	font-size:20px;
+	text-align:center;
+}
+.init{
+	font-size:28px;
+	font-weight:bold;
+	text-align:center;
+}

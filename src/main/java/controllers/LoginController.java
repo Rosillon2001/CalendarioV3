@@ -1,5 +1,10 @@
 package controllers;
 
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import helpers.ConnectionDB;
 import propertiesReader.PropertiesReader;
 
@@ -12,7 +17,7 @@ public class LoginController {
 		
 	}
 	
-		public boolean Login(String username, String pass) {
+		public boolean AuthCheck(String username, String pass) {
 			
 			
 			String usuario=DB.getUsuario(username);
@@ -25,7 +30,16 @@ public class LoginController {
 			}else {
 				return false;
 			}
+		}
+		
+		public boolean Login(HttpServletRequest request, String username, String password) throws SQLException {
 			
-			
+			if(AuthCheck(username, password)==true) {
+			HttpSession HSession=request.getSession();
+			HSession.setAttribute("Usuario", username);
+			return true;
+			}else {
+				return false;
+			}
 		}
 }
