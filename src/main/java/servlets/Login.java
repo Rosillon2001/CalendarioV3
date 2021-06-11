@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +60,9 @@ public class Login extends HttpServlet {
 		HttpSession session=request.getSession();
 		try {
 			if(LC.Login(request,username, pass) && session.getAttribute(username)==null) {
-				response.sendRedirect("/public/views/a.html");
+				RequestDispatcher rd=request.getRequestDispatcher("/public/views/a.html");
+				rd.include(request, response);
+				//response.sendRedirect("/public/views/a.html");
 			}else {
 				s.print("<script>window.alert('Las credenciales no coinciden con los datos en nuestro registro')</script>");
 				response.sendRedirect("/public/views/Login.html");
