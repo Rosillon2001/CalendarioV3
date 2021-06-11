@@ -20,6 +20,7 @@ import helpers.Hashing;
  * Servlet implementation class Login
  */
 @MultipartConfig()
+//@WebServlet("/public/views/Login")
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 2L;
@@ -60,12 +61,12 @@ public class Login extends HttpServlet {
 		HttpSession session=request.getSession();
 		try {
 			if(LC.Login(request,username, pass) && session.getAttribute(username)==null) {
-				RequestDispatcher rd=request.getRequestDispatcher("/public/views/a.html");
+				//response.sendRedirect("Calendario.html");
+				RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 				rd.include(request, response);
-				//response.sendRedirect("/public/views/a.html");
 			}else {
 				s.print("<script>window.alert('Las credenciales no coinciden con los datos en nuestro registro')</script>");
-				response.sendRedirect("/public/views/Login.html");
+				response.sendRedirect("Login.html");
 			}
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block

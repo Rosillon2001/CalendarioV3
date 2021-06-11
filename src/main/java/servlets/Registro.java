@@ -18,8 +18,8 @@ import helpers.Auth;
  * Servlet implementation class Registro
  */
 @MultipartConfig()
+//@WebServlet("/public/views/Registro")
 @WebServlet("/Registro")
-
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
@@ -64,9 +64,9 @@ public class Registro extends HttpServlet {
 		if(pass.equals(pass2) && userExists==false){
 			pass=Hash.getHash(pass);
 			RC.registro(username, pass);
-			RequestDispatcher rd=request.getRequestDispatcher("/public/views/Login.html");
+			RequestDispatcher rd=request.getRequestDispatcher("/Login.html");
 			rd.include(request, response);
-			//response.sendRedirect("/public/views/Login.html");
+			//response.sendRedirect("Login.html");
 		}else {
 			//RequestDispatcher rd=request.getRequestDispatcher("/Register.html");
 			//rd.forward(request, response);

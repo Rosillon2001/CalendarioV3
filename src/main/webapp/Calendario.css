@@ -1,0 +1,56 @@
+@charset "ISO-8859-1";
+
+#banner{
+	border-radius:1em;
+	background: linear-gradient(45deg,#fad964, rgb(249, 208, 70), rgb(252, 227, 141), #f2af66); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
+    margin-bottom:10px;
+    width:auto;
+    height:100px;
+  	position:relative;
+}
+.logo{
+	float:left;
+	height:100px;
+	width:250px;
+	margin-top:15px;
+	margin-bottom:15px;
+	margin-left: 15px;
+}
+@keyframes Bg {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+#reloj{
+	font-style:italic;
+	font-size:20px;
+	font-weight:bold;
+	color:black;
+	position:absolute;
+	top : 50%; left : 50%;
+	transform : translate(-50%, -50%);
+	align-items:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:auto;
+	margin-bottom:auto;
+	border-radius:3px;
+	box-shadow: 8px 8px 10px;
+	padding:5px;
+}
+#hora{
+	text-align:center;
+}
+#date{
+	text-align:center;
+}
+
+#CalenDiv{
+	height:100vh;
+	width:200px;
+	background-color:#a5d7d8;
+	border-color:black;
+	border-width:2px;
+}
