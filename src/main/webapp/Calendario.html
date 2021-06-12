@@ -17,24 +17,26 @@
 		<div id='userCont'>
 			<input type='image' id="user"src="images/User.png"></input>
 		</div>
+
 </div>
 
 <div id="CalenDiv">
 	<div id='MisCal'>Mis Calendarios
-		<input type="image" id='createCal' src='images/add.png'></input>
+			<input type="image" id='createCal' src='images/add.png'></input>
 	</div>
 	<div id='OtherCal'>Calendarios de Invitado</div>
 </div>
+
 <div>
-	<form action="Calendar" method='get'>
+	<form id="registro_cal">
 		Nombre del Calendario: <br>
-		<input type="text" name='nombre_calendario'class='input'><br>
+		<input class='form-input' type="text" name='nombre_calendario' id='nombre-cal'><br>
 		<br>
 		Color:<br>
-		 <input type="text" name='color_calendario'class='input'><br>
+		<input class='form-input' type="text" name='color_calendario' id='color-cal'><br>
 		<br>
-		<input type='submit' value='Crear Calendario' class='boton'>
 	</form>
+	<button class='button' id='boton_cal'>Crear Cal</button>
 </div>
 
 <script type="text/javascript" src="Calendario.js" defer></script>	

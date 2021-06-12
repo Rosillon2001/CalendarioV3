@@ -1,14 +1,10 @@
 /**
  * 
  */
-var username=document.getElementById('username');
-var userdiv=document.getElementById('userCont');
-var usertxt=username.innerHTML;
-var div=document.createElement('div');
-div.setAttribute("id", "NombreUsuario");
-div.textContent=`${usertxt}`;
-userdiv.appendChild(div);
 
+var username=document.getElementById('NombreUsuario');
+var userdiv=document.getElementById('userCont');
+userdiv.appendChild(username);
 
 //-----------------------------------------------------RELOJ----------------------------------------------------------
 //funcion de creacion del reloj
@@ -33,7 +29,7 @@ let m=meses[mes];
 let d=dias[diasemana-1];
 let hr=(hora>12) ? hora-12: hora;
 var ampm;
-if(hora>12){
+if(hora>=12 && min>0){
 	ampm='PM';
 }
 else{
@@ -53,4 +49,30 @@ tiempo.textContent=`${hr}:${min}:${sec} ${ampm}`;
 fecha.textContent=`${d}, ${dia} de ${m} del ${ano} `;
 }
 setInterval(Reloj, 1000);
+
+//---------------------------------------------------------Datos del calendario-----------------------------------------------------------------
+var cal=document.getElementById("registro_cal");
+var btn=document.getElementById('boton_cal');
+
+const enviarCal=()=>{
+	let form=new FormData(cal);
+	for (let value of form.values()){
+		console.log(value);
+	}
+	
+	const data={
+		method:'POST',
+		body:form, 
+	};
+	//http://localhost:8080/Calendario_Local/CreateCalendar
+	fetch('calendstar.herokuapp.com/CreateCalendar', data).then(response =>{
+		return response.json();
+	}
+	).then(datos =>{
+		console.table(datos);
+	}
+	);
+}
+btn.onclick=enviarCal;
+
 

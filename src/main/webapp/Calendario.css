@@ -70,6 +70,7 @@
 	display:grid;
 	grid-template-areas:
     "a b";
+    position:relative;
 }
 #user{
 	margin-top:20px;
@@ -78,6 +79,7 @@
 	width:60px;
 	height:60px;
 	grid-area:b;
+	cursor:pointer;
 }
 
 #createCal{
@@ -95,3 +97,6 @@
 	align-self:center;
 	justify-self:center;
 }
+
+
+

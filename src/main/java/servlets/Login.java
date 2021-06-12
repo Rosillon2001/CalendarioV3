@@ -80,7 +80,7 @@ public class Login extends HttpServlet {
 	}
 	public void UserSession(HttpServletResponse resp, Object user) throws IOException {
 		PrintWriter s=resp.getWriter();
-		s.print("<html><body><p id='username'>"+user+"</p></body></html>");
+		s.print("<html><body><div id='NombreUsuario'>"+user+"</div></body></html>");
 	}
 
 }
