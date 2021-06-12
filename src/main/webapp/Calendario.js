@@ -65,7 +65,7 @@ const enviarCal=()=>{
 		body:form, 
 	};
 	//http://localhost:8080/Calendario_Local/CreateCalendar
-	fetch('calendstar.herokuapp.com/CreateCalendar', data).then(response =>{
+	fetch('http://calendstar.herokuapp.com/CreateCalendar', data).then(response =>{
 		return response.json();
 	}
 	).then(datos =>{
