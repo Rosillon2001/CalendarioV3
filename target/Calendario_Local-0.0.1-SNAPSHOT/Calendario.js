@@ -1,17 +1,7 @@
 /**
  * 
  */
-var username=document.getElementById('username');
-var userdiv=document.getElementById('userCont');
-var usertxt=username.innerHTML;
-var div=document.createElement('div');
-div.setAttribute("id", "NombreUsuario");
-div.textContent=`${usertxt}`;
-userdiv.appendChild(div);
 
-
-//-----------------------------------------------------RELOJ----------------------------------------------------------
-//funcion de creacion del reloj
 function Reloj(){
 var tiempo=document.getElementById('hora');
 var fecha=document.getElementById('date');
@@ -32,13 +22,7 @@ let diasemana=f.getDay();
 let m=meses[mes];
 let d=dias[diasemana-1];
 let hr=(hora>12) ? hora-12: hora;
-var ampm;
-if(hora>12){
-	ampm='PM';
-}
-else{
-	ampm='AM';
-}
+let ampm=(hora>12) ? "PM":"AM";
 if(hr==0){
 	hr=12;
 }
@@ -53,4 +37,3 @@ tiempo.textContent=`${hr}:${min}:${sec} ${ampm}`;
 fecha.textContent=`${d}, ${dia} de ${m} del ${ano} `;
 }
 setInterval(Reloj, 1000);
-

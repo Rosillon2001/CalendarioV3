@@ -21,7 +21,7 @@ Create table Actividad(
 	id_actividad numeric(15) primary key, 
 	nombre_actividad varchar(50),
 	descripcion_actividad varchar(150),
-	color_actividad varchar(80),
+	color_actividad varchar(40),
 	fecha_actividad date,
 	hora_inicio varchar(20),
 	hora_fin varchar(20),

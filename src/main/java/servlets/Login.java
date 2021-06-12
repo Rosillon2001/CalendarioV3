@@ -64,6 +64,7 @@ public class Login extends HttpServlet {
 				//response.sendRedirect("Calendario.html");
 				RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 				rd.include(request, response);
+				//System.out.println(session.getAttribute("Usuario"));
 			}else {
 				s.print("<script>window.alert('Las credenciales no coinciden con los datos en nuestro registro')</script>");
 				response.sendRedirect("Login.html");
@@ -73,6 +74,13 @@ public class Login extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		//pasar el username al front
+		UserSession(response, session.getAttribute("Usuario"));
+		
+	}
+	public void UserSession(HttpServletResponse resp, Object user) throws IOException {
+		PrintWriter s=resp.getWriter();
+		s.print("<html><body><p id='username'>"+user+"</p></body></html>");
 	}
 
 }

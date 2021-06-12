@@ -1,8 +1,0 @@
-controllers\RegisterController.class
-helpers\Auth.class
-servlets\Registro.class
-helpers\Hashing.class
-propertiesReader\PropertiesReader.class
-controllers\LoginController.class
-helpers\ConnectionDB.class
-servlets\Login.class

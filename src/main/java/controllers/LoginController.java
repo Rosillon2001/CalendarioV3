@@ -37,6 +37,7 @@ public class LoginController {
 			if(AuthCheck(username, password)==true) {
 			HttpSession HSession=request.getSession();
 			HSession.setAttribute("Usuario", username);
+			System.out.println(HSession.getAttribute("Usuario"));
 			return true;
 			}else {
 				return false;
