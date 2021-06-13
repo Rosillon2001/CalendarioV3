@@ -49,6 +49,9 @@ public class CreateCalendar extends HttpServlet {
 		System.out.println(nombre_calendario);
 		System.out.println(color_calendario);
 		
+		PrintWriter pr=response.getWriter();
+		pr.print("<html><body><div>"+nombre_calendario+color_calendario+"</div>"+"</body></html>");
+		
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/
 		
