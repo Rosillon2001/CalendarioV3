@@ -63,7 +63,8 @@ const enviarCal=()=>{
 	const data={
 		method:'POST',
 		body:form,
-		headers:{}
+		headers:{"Access-Control-Allow-Origin" : "*", 
+"Access-Control-Allow-Credentials" : true }
 	};
 	//http://localhost:8080/Calendario_Local/CreateCalendar
 	fetch('https://calendstar.herokuapp.com/CreateCalendar', data).then(response =>{
