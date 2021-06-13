@@ -52,6 +52,7 @@ public class CreateCalendar extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Origin: ", "*");
 		PrintWriter pr=response.getWriter();
 		//pr.print("<html><body><div>"+nombre_calendario+color_calendario+"</div>"+"</body></html>");
+		response.setContentType("text/html");
 		pr.print("<script>console.log("+nombre_calendario+")"+"</script>");
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/
