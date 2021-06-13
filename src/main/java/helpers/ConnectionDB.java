@@ -114,6 +114,43 @@ public String getClave(String username) {
 	
 }
 
+//id del calendario
+public int idCal() {
+		int id=1;
+		try {
+			this.stmt=this.conn.createStatement();
+			this.rs=this.stmt.executeQuery("SELECT MAX(id_calendario) FROM Calendario");
+			while(rs.next()) {
+				id=rs.getInt(1)+1;
+			}
+			}catch(Exception e) {
+			System.out.println("Error"+e.getMessage());	
+			}finally {
+				try {
+					this.stmt.close();
+					this.rs.close();
+				}catch(Exception o){	
+				}
+			}
+		return id;
+}
+
+//registro del calendario
+public void regCalendar(int id, String nombre, String color) {
+	//insert into Usuario values(?,?,?)
+	try {
+		this.pstmt=this.conn.prepareStatement("insert into Calendario values(?,?,?)");
+		this.pstmt.setInt(1, id);
+		this.pstmt.setString(2, nombre);
+		this.pstmt.setString(3, color);
+		
+		this.pstmt.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
 	//cerrar conexion con la base de datos
 		public void dbClose() {
 			try {

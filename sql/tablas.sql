@@ -5,13 +5,14 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Calendario (
-	id_calendario varchar(50) primary key,
-	nombre_calendario varchar(50)
+	id_calendario numeric(50) primary key,
+	nombre_calendario varchar(50),  
+	color varchar(30)
 );
 
 CREATE TABLE Acceso (
 	id_usuario numeric(15),
-	id_calendario varchar(50),
+	id_calendario numeric(50),
 	privilegios varchar(20), 
 	foreign key (id_usuario) references Usuario (id_usuario),
 	foreign key (id_calendario) references Calendario (id_calendario)
@@ -27,6 +28,6 @@ Create table Actividad(
 	hora_fin varchar(20),
 	duracion varchar(20),
 	estado varchar(20), 
-	id_calendario varchar(50), 
+	id_calendario numeric(50), 
 	foreign key (id_calendario) references Calendario (id_calendario)
 );

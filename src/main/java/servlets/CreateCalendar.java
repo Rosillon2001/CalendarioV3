@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import controllers.CalendarCreation;
 
 /**
  * Servlet implementation class CreateCalendar
@@ -52,10 +55,16 @@ public class CreateCalendar extends HttpServlet {
 		String nombre_calendario=request.getParameter("nombre_calendario");
 		String color_calendario=request.getParameter("color_calendario");
 		
-			
 		response.addHeader("Access-Control-Allow-Origin: ", "*");
 		PrintWriter pr=response.getWriter();
-		pr.print("<html><body><div>"+nombre_calendario+color_calendario+"</div>"+"</body></html>");
+		pr.print("{\"nombre\":\""+nombre_calendario+"\",\"color\":\""+color_calendario+"\"}");
+		CalendarCreation CC=new CalendarCreation();
+		try {
+			CC.RegistrarCalendario(nombre_calendario, color_calendario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/
 		

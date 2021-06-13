@@ -54,11 +54,14 @@ setInterval(Reloj, 1000);
 //---------------------------------------------------------Datos del calendario-----------------------------------------------------------------
 var cal=document.getElementById("registro_cal");
 var btn=document.getElementById('boton_cal');
-
+var dataCal=[];
+var i=0;
 const enviarCal=()=>{
-	let form=new FormData(cal);
-	for (let value of form.values()){
-		console.log(value);
+	var form=new FormData(cal);
+	for (var value of form.values()){
+		//console.log(value);
+		dataCal[i]=value;
+		i++;
 	}
 	
 	const data={
@@ -68,14 +71,26 @@ const enviarCal=()=>{
 	};
 	//http://localhost:8080/Calendario_Local/CreateCalendar
 	//CreateCalendar
-	fetch('CreateCalendar', data).
+	fetch('CreateCalendar', data).then(response=>{
+		return response.json();
+	}		
+	).
 	then(datos =>{
-		console.table(datos);
+		console.table(datos), 
+		console.log(dataCal);
+		crear(datos);
 	}
 	);
+
 }
 btn.onclick=enviarCal;
 
+function crear(json){
+	var div=document.createElement('div');
+	div.setAttribute('id',json.nombre);
+	div.innerHTML="<label style=color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</label>";	
+	document.body.appendChild(div);
+}
 //--------------------------------------------------Mostrar formulario del calendario------------------------------------------------------------------
 
 var add=document.getElementById('createCal');
