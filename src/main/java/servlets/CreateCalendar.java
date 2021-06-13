@@ -52,7 +52,7 @@ public class CreateCalendar extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Origin: ", "*");
 		PrintWriter pr=response.getWriter();
 		//pr.print("<html><body><div>"+nombre_calendario+color_calendario+"</div>"+"</body></html>");
-		pr.print("{message: user created,status: 200}" );
+		
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/
 		
