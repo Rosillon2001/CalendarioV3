@@ -63,7 +63,8 @@ const enviarCal=()=>{
 	const data={
 		method:'POST',
 		body:form,
-		headers:{"Accept":"application/json"}
+		headers:{"Accept":"application/json"},
+		mode:'cors'
 	};
 	//http://localhost:8080/Calendario_Local/CreateCalendar
 	fetch('CreateCalendar', data).then(response =>{
