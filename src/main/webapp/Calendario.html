@@ -20,24 +20,28 @@
 
 </div>
 
-<div id="CalenDiv">
-	<div id='MisCal'>Mis Calendarios
-			<input type="image" id='createCal' src='images/add.png'></input>
+<div id='pageCont'>
+	<div id="CalenDiv">
+		<div id='MisCal'>Mis Calendarios
+				<abbr title='Crear un calendario'><input type="image" id='createCal' src='images/add.png'></abbr>
+				<abbr title='Refrescar y mostrar Calendarios'><input type="image" id='refreshCal' src='images/Refresh.png'></abbr>
+		</div>
+		<div id='OtherCal'>Calendarios de Invitado</div>
 	</div>
-	<div id='OtherCal'>Calendarios de Invitado</div>
-</div>
-
-<div>
-	<form id="registro_cal">
-		Nombre del Calendario: <br>
-		<input class='form-input' type="text" name='nombre_calendario' id='nombre-cal'><br>
-		<br>
-		Color:<br>
-		<input class='form-input' type="text" name='color_calendario' id='color-cal'><br>
-		<br>
-	</form>
-	<button class='button' id='boton_cal'>Crear Cal</button>
-</div>
+	
+	<div id='divFormCalendario'>
+		<form id="registro_cal">
+			Nombre del Calendario: <br>
+			<input class='form-input' type="text" name='nombre_calendario' id='nombre-cal'><br>
+			<br>
+			Color del calendario:<br>
+			<input class='form-input' type="text" name='color_calendario' id='color-cal'><br>
+			<br>
+		</form>
+		<button class='button' id='boton_cal'>Crear Calendario</button>
+	</div>
+</div>	
+	
 
 <script type="text/javascript" src="Calendario.js" defer></script>	
 </body>

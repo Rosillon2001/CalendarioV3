@@ -12,7 +12,7 @@ function Reloj(){
 var tiempo=document.getElementById('hora');
 var fecha=document.getElementById('date');
 //dias y meses
-let dias=['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+let dias=['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 let meses=['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 
 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -25,8 +25,9 @@ let mes=f.getMonth();
 let ano=f.getFullYear();
 let diasemana=f.getDay();
 
+
 let m=meses[mes];
-let d=dias[diasemana-1];
+let d=dias[diasemana];
 let hr=(hora>12) ? hora-12: hora;
 var ampm;
 if(hora>=12 && min>0){
@@ -66,14 +67,32 @@ const enviarCal=()=>{
 		mode:'cors'
 	};
 	//http://localhost:8080/Calendario_Local/CreateCalendar
-	fetch('CreateCalendar', data).then(response =>{
-		return response.json();
-	}
-	).then(datos =>{
+	//CreateCalendar
+	fetch('CreateCalendar', data).
+	then(datos =>{
 		console.table(datos);
 	}
 	);
 }
 btn.onclick=enviarCal;
 
+//--------------------------------------------------Mostrar formulario del calendario------------------------------------------------------------------
 
+var add=document.getElementById('createCal');
+var contador=0;
+
+cal.style.display='none';
+btn.style.display='none';
+function HideNSeek(){
+	if(contador%2==0){
+		cal.style.display='none';
+		btn.style.display='none';
+	}
+	else{
+		cal.style.display='';
+		btn.style.display='';
+	}
+	
+	contador++;
+}
+add.onclick=HideNSeek;
