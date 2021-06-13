@@ -63,11 +63,10 @@ const enviarCal=()=>{
 	const data={
 		method:'POST',
 		body:form,
-		headers:{"Access-Control-Allow-Origin" : "*", 
-"Access-Control-Allow-Credentials" : true }
+		headers:{"Accept":"application/json"}
 	};
 	//http://localhost:8080/Calendario_Local/CreateCalendar
-	fetch('https://calendstar.herokuapp.com/CreateCalendar', data).then(response =>{
+	fetch('CreateCalendar', data).then(response =>{
 		return response.json();
 	}
 	).then(datos =>{
