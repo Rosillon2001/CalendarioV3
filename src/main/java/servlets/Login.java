@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controllers.CalendarCreation;
 import controllers.LoginController;
 import helpers.Auth;
+import helpers.ConnectionDB;
 import helpers.Hashing;
 /**
  * Servlet implementation class Login
@@ -27,12 +30,15 @@ public class Login extends HttpServlet {
        
 	Hashing hash=new Hashing();
 	Auth auth=new Auth();
+	CalendarCreation CC=new CalendarCreation();
+	ConnectionDB DB=ConnectionDB.getInstances();
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Login() {
         super();
         // TODO Auto-generated constructor stub
+      
     }
 
 	/**
@@ -76,11 +82,21 @@ public class Login extends HttpServlet {
 		
 		//pasar el username al front
 		UserSession(response, session.getAttribute("Usuario"));
+		String usuariosesion=(String) session.getAttribute("Usuario");
 		
 	}
 	public void UserSession(HttpServletResponse resp, Object user) throws IOException {
 		PrintWriter s=resp.getWriter();
 		s.print("<html><body><div id='NombreUsuario'>"+user+"</div></body></html>");
 	}
-
+	
+	public void elementos( HttpServletResponse response, String usuariosesion) throws IOException {
+		//obtener los calendarios del usuario y pasarlos al front
+				int idsession=DB.idSession(usuariosesion);
+		        System.out.println(CC.calends(idsession));
+		        for(int i=0;i<CC.calends(i).size();i++) {
+		        PrintWriter pr=response.getWriter();
+				pr.print(""+CC.calends(idsession).get(i)+"");
+		        }
+	}
 }

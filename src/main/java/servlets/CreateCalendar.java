@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controllers.CalendarCreation;
+import helpers.ConnectionDB;
 
 /**
  * Servlet implementation class CreateCalendar
@@ -20,14 +23,16 @@ import controllers.CalendarCreation;
 @MultipartConfig()
 @WebServlet("/CreateCalendar")
 public class CreateCalendar extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	private static final long serialVersionUID = 3L;
+	CalendarCreation CC=new CalendarCreation();
+	ConnectionDB DB=ConnectionDB.getInstances();
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CreateCalendar() {
         super();
         // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -35,14 +40,15 @@ public class CreateCalendar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html");
-		response.sendRedirect("Calendario.html");
+		response.setContentType("application/json");
 		
-		String nombre_calendario=request.getParameter("nombre_calendario");
-		String color_calendario=request.getParameter("color_calendario");
+		HttpSession session=request.getSession();
+		String usuariosesion=(String) session.getAttribute("Usuario");
 		
-		PrintWriter pr=response.getWriter();
-		pr.print("<html><body><div>"+nombre_calendario+color_calendario+"</div>"+"</body></html>");
+		int idsession=DB.idSession(usuariosesion);
+	        PrintWriter pr=response.getWriter();
+			pr.print(""+CC.calends(idsession)+"");
+        
 	}
 
 	/**
@@ -52,22 +58,30 @@ public class CreateCalendar extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
 		
+		HttpSession session=request.getSession();
+		String usuariosesion=(String) session.getAttribute("Usuario");
+		
+		int idsession=DB.idSession(usuariosesion);
+		
+		
 		String nombre_calendario=request.getParameter("nombre_calendario");
 		String color_calendario=request.getParameter("color_calendario");
 		
 		response.addHeader("Access-Control-Allow-Origin: ", "*");
 		PrintWriter pr=response.getWriter();
 		pr.print("{\"nombre\":\""+nombre_calendario+"\",\"color\":\""+color_calendario+"\"}");
-		CalendarCreation CC=new CalendarCreation();
+		
+		
 		try {
-			CC.RegistrarCalendario(nombre_calendario, color_calendario);
+			CC.RegistrarCalendario(nombre_calendario, color_calendario, idsession);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/
-		
+        
 		
 	}
 

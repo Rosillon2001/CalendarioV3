@@ -51,7 +51,7 @@ fecha.textContent=`${d}, ${dia} de ${m} del ${ano} `;
 }
 setInterval(Reloj, 1000);
 
-//---------------------------------------------------------Datos del calendario-----------------------------------------------------------------
+//---------------------------------------------------------Datos del calendario mediante fetch post-----------------------------------------------------------------
 var cal=document.getElementById("registro_cal");
 var btn=document.getElementById('boton_cal');
 var dataCal=[];
@@ -77,7 +77,7 @@ const enviarCal=()=>{
 	).
 	then(datos =>{
 		console.table(datos), 
-		console.log(dataCal);
+		console.log(dataCal),
 		crear(datos);
 	}
 	);
@@ -111,3 +111,41 @@ function HideNSeek(){
 	contador++;
 }
 add.onclick=HideNSeek;
+
+
+//-----------------------------------------------------Obtener los calendarios correspondientes a la sesion-----------------------------------------------------
+var ref=document.getElementById('refresh');
+var btnr=document.getElementById('refreshCal');
+
+const recibirCal=()=>{
+
+var options = {
+        method: 'GET',
+        mode: 'cors'
+    };
+
+fetch('CreateCalendar', options).then(response=>{
+		return response.json();
+	}		
+	).
+	then(datos =>{
+		console.table(datos), 
+		console.log(datos),
+		crearBar(datos);
+	}
+	);
+
+}
+
+btnr.onclick=recibirCal;
+
+
+//------------------------------------------------------Contruccion de calendarios (barra lateral)---------------------------------------------------
+function crearBar(Array=[]){
+	for(let i=0;i<Array.length;i++){
+		var div=document.createElement('div');
+	div.setAttribute('id',Array[i].nombre);
+	div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
+	document.body.appendChild(div);
+	}
+}

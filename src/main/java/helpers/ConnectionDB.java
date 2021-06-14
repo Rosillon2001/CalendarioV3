@@ -40,6 +40,7 @@ public class ConnectionDB {
 		return DB;
 	}
 	
+	//------------------------------------------------------MANEJO DE USUARIO------------------------------------------------------------------
 	//Id
 public int userId(){
 		int id=1;
@@ -74,6 +75,20 @@ public void regUsuario(String query, int id, String username, String pass ) {
 		e.printStackTrace();
 	}
 	
+}
+//obtener el id de usuario de la sesion
+public int idSession(String username) {
+	int idUs=0;
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery("select *from usuario where nombre_usuario="+"'"+username+"'");
+		while(rs.next()) {
+			idUs=rs.getInt("id_usuario");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return idUs;
 }
 
 //obtener el usuario si esta registrado en la DB
@@ -114,6 +129,8 @@ public String getClave(String username) {
 	
 }
 
+
+//-------------------------------------------------------------------------MANEJO DEL CALENDARIO------------------------------------------------------------------
 //id del calendario
 public int idCal() {
 		int id=1;
@@ -151,6 +168,69 @@ public void regCalendar(int id, String nombre, String color) {
 	}
 }
 
+//vinculacion entre usuario y calendario mediante el registro de acceso
+public void accesoEd(int userId, int idCalendar) {
+	try {
+	this.pstmt=this.conn.prepareStatement("insert into Acceso values(?,?,?)");
+	this.pstmt.setInt(1, userId);
+	this.pstmt.setInt(2, idCalendar);
+	this.pstmt.setString(3, "Editor");
+	
+	this.pstmt.executeUpdate();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+}
+
+//Obtener Calendarios por id
+public String getCalendars(int idcal) {
+	String AA="";
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery("SELECT *FROM Calendario where id_calendario="+"'"+ idcal+"'");
+		while(rs.next()) {
+			AA+="{\"nombre\":\""+rs.getString("nombre_calendario")+"\",\"color\":\""+rs.getString("color")+"\"}";
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			this.stmt.close();
+			this.rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	return AA;
+}
+
+//metodo para obtener los calendarios de editor
+public String OwnCalendars(int userid) {
+	String idcalendarios = "";
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery("SELECT *FROM Acceso where id_usuario="+"'"+userid+"'");
+		while(rs.next()) {
+			idcalendarios+=rs.getInt("id_calendario")+"-";
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			this.stmt.close();
+			this.rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	return idcalendarios;
+}	
+
+
+
+
+
+//-----------------------------------------------------------CIERRE DE LA CONEXION--------------------------------------------------------------------------------------------
 	//cerrar conexion con la base de datos
 		public void dbClose() {
 			try {

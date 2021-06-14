@@ -2,13 +2,19 @@
 
 #banner{
 	border-radius:1em;
-	background: linear-gradient(45deg,#fad964, rgb(249, 208, 70), rgb(252, 227, 141), #f2af66); 
+	background: linear-gradient(130deg,#fad964, rgb(249, 208, 70), rgb(252, 227, 141), #f2af66); 
 	background-size: 800% 100%;
     animation: Bg 20s ease infinite;
     margin-bottom:10px;
     width:auto;
     height:100px;
   	position:relative;
+  	display:grid;
+  	grid-template-columns: repeat(5, 1fr);
+ 	grid-gap: 10px;
+  	grid-auto-rows: 100px;
+  	grid-template-areas:
+    "a b c d e";
 }
 .logo{
 	float:left;
@@ -40,6 +46,9 @@
 	box-shadow: 8px 8px 10px;
 	padding:5px;
 }
+#pageCont{
+	display:flex;
+}
 #CalenDiv{
 	height:100vh;
 	width:200px;
@@ -60,13 +69,62 @@
 	width:auto;
 	height:auto;
 	text-align:right;
-	position:relative;
+	grid-area:e;
+	display:grid;
+	grid-template-areas:
+    "a b";
+    position:relative;
 }
 #user{
-	position:relative;
+	margin-top:20px;
+	margin-right:10px;
 	background-color:transparent;
 	width:60px;
 	height:60px;
-	vertical-align:middle;
+	grid-area:b;
+	cursor:pointer;
 }
+
+#createCal{
+	margin-top:7px;
+	position:relative;
+	width:16px;
+	height:16px;
+}
+#refreshCal{
+	margin-top:7px;
+	position:relative;
+	width:16px;
+	height:16px;
+	margin-left:3px;
+}
+#NombreUsuario{
+	font-size:18px;
+	font-style:italic;
+	font-weight:bold;
+	color:black;
+	grid-area:a;
+	align-self:center;
+	justify-self:center;
+}
+
+#divFormCalendario{
+	height:auto;
+	width:auto;
+	margin: auto;
+	text-align:center;
+	font-style:italic;
+	font-size:24px;
+}
+.button{
+	height:auto;
+	width:auto;
+	margin: auto;
+	font-style:italic;
+	font-size:18px;
+	border-radius:1em;
+	cursor:pointer;
+}
+
+
 

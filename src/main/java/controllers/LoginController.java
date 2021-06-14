@@ -38,6 +38,8 @@ public class LoginController {
 			HttpSession HSession=request.getSession();
 			HSession.setAttribute("Usuario", username);
 			System.out.println(HSession.getAttribute("Usuario"));
+			String usuario=(String) HSession.getAttribute("Usuario");
+			System.out.println("Id"+DB.idSession(usuario));
 			return true;
 			}else {
 				return false;
