@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controllers.CalendarCreation;
+import helpers.Auth;
 import helpers.ConnectionDB;
 
 /**
@@ -26,6 +27,7 @@ public class CreateCalendar extends HttpServlet {
 	private static final long serialVersionUID = 3L;
 	CalendarCreation CC=new CalendarCreation();
 	ConnectionDB DB=ConnectionDB.getInstances();
+	Auth auth=new Auth();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -67,17 +69,20 @@ public class CreateCalendar extends HttpServlet {
 		String nombre_calendario=request.getParameter("nombre_calendario");
 		String color_calendario=request.getParameter("color_calendario");
 		
-		response.addHeader("Access-Control-Allow-Origin: ", "*");
 		PrintWriter pr=response.getWriter();
-		pr.print("{\"nombre\":\""+nombre_calendario+"\",\"color\":\""+color_calendario+"\"}");
-		
-		
-		try {
-			CC.RegistrarCalendario(nombre_calendario, color_calendario, idsession);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(auth.calendExists(nombre_calendario)==false) {
+			response.addHeader("Access-Control-Allow-Origin: ", "*");
+			pr.print("{\"nombre\":\""+nombre_calendario+"\",\"color\":\""+color_calendario+"\"}");
+			try {
+				CC.RegistrarCalendario(nombre_calendario, color_calendario, idsession);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			pr.print("{\"status\":\"500\", \"message\":\"calendario con ese nombre existe\"}");
 		}
+		
 		
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/

@@ -15,6 +15,14 @@ public class Auth {
 		}else {
 			return false;
 		}
+	}
+	
+	public boolean calendExists(String calendario) {
 		
+		if(DB.nameCalendar(calendario)!=null) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

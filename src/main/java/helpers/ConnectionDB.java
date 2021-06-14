@@ -93,7 +93,7 @@ public int idSession(String username) {
 
 //obtener el usuario si esta registrado en la DB
 public String getUsuario(String username) {
-	String user = null; String pass = null;
+	String user = null; 
 	PropertiesReader PR= PropertiesReader.getInstances();
 	Properties prop=new Properties();
 	try {
@@ -101,7 +101,6 @@ public String getUsuario(String username) {
 		this.rs=this.stmt.executeQuery(PR.prop.getProperty("selectUser")+"'"+username+"'");
 		while(rs.next()) {
 		user= rs.getString("nombre_usuario");
-		pass=rs.getString("clave");
 		}
 	}catch(SQLException e) {
 		e.printStackTrace();
@@ -152,6 +151,23 @@ public int idCal() {
 		return id;
 }
 
+
+public String nameCalendar(String calendario) {
+	String cal = null; 
+	PropertiesReader PR= PropertiesReader.getInstances();
+	Properties prop=new Properties();
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery("select *from calendario where nombre_calendario="+"'"+calendario+"'");
+		while(rs.next()) {
+		cal= rs.getString("nombre_calendario");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	
+	return cal;
+}
 //registro del calendario
 public void regCalendar(int id, String nombre, String color) {
 	//insert into Usuario values(?,?,?)
@@ -209,7 +225,7 @@ public String OwnCalendars(int userid) {
 	String idcalendarios = "";
 	try {
 		this.stmt=this.conn.createStatement();
-		this.rs=this.stmt.executeQuery("SELECT *FROM Acceso where id_usuario="+"'"+userid+"'");
+		this.rs=this.stmt.executeQuery("SELECT *FROM Acceso where id_usuario="+"'"+userid+"'"+"and privilegios ="+"'Editor'");
 		while(rs.next()) {
 			idcalendarios+=rs.getInt("id_calendario")+"-";
 		}
@@ -226,7 +242,23 @@ public String OwnCalendars(int userid) {
 	return idcalendarios;
 }	
 
-
+//borrado calendario
+public void borrar(int I) {
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery("DELETE FROM Calendario Where nombre_calendario="+I);
+	}	catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			this.stmt.close();
+			this.rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	return;
+}
 
 
 

@@ -85,11 +85,17 @@ const enviarCal=()=>{
 }
 btn.onclick=enviarCal;
 
+//-----------------------------------------------Crea los div de los calendarios-----------------------------------------------------------------
+var caldiv1=document.getElementById('calends1');
 function crear(json){
-	var div=document.createElement('div');
-	div.setAttribute('id',json.nombre);
-	div.innerHTML="<label style=color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</label>";	
-	document.body.appendChild(div);
+	if(json.status==500){
+		window.alert('Un calendario con ese nombre ya existe')
+	}else{
+		var div=document.createElement('div');
+		div.setAttribute('id',json.nombre);
+		div.innerHTML="<label style=background-color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</label>";	
+		caldiv1.appendChild(div);
+	}
 }
 //--------------------------------------------------Mostrar formulario del calendario------------------------------------------------------------------
 
@@ -137,15 +143,24 @@ fetch('CreateCalendar', options).then(response=>{
 
 }
 
-btnr.onclick=recibirCal;
 
 
 //------------------------------------------------------Contruccion de calendarios (barra lateral)---------------------------------------------------
+var caldiv1=document.getElementById('calends1');
 function crearBar(Array=[]){
 	for(let i=0;i<Array.length;i++){
-		var div=document.createElement('div');
-	div.setAttribute('id',Array[i].nombre);
-	div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
-	document.body.appendChild(div);
+		if(!!document.getElementById(`${Array[i].nombre}`)==true){//al momento de refrescar los calendarios, se omitiran la creacion de los ya existentes
+			console.log("ya existe");
+		}else{
+			var div=document.createElement('div');
+			div.setAttribute('id',Array[i].nombre);
+			div.innerHTML="<label style=background-color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
+			caldiv1.appendChild(div);
+		}
 	}
 }
+
+window.onload = function() {
+	recibirCal();
+  crearBar();
+};
