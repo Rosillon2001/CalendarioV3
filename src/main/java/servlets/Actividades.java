@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -66,14 +67,27 @@ public class Actividades extends HttpServlet {
 		String[] splitEnd=end.split(":");
 		String endS=splitEnd[0];
 		
-		int duracion=Integer.parseInt(endS)-Integer.parseInt(initS);
+		String[] splitDate=fecha.split("-");
+		String ano=splitDate[0];
+		String mes=splitDate[1];
+		String dia=splitDate[2];
 		
+		int anio=Integer.parseInt(ano)-1900;
+		int meis=Integer.parseInt(mes);
+		int diaa=Integer.parseInt(dia);
+		
+		int duracion=Integer.parseInt(endS)-Integer.parseInt(initS);
+		String dur=String.valueOf(duracion);
 		int f=getIdCalendar(nombre_calendario, idsession);
 		
-		System.out.println(nombre_actividad+"-"+nombre_calendario+"-"+color_actividad+"-"+fecha+"-"+descripcion_actividad+"-"+init+"-"+end+"IDcal: "+f+"--"+duracion);
+		
+		@SuppressWarnings("deprecation")
+		java.sql.Date fecha2=new java.sql.Date(anio, meis, diaa);
+		System.out.println(nombre_actividad+"-"+nombre_calendario+"-"+color_actividad+"-"+fecha2+"-"+descripcion_actividad+"-"+init+"-"+end+"IDcal: "+f+"--"+duracion);
 		
 		PrintWriter pr=response.getWriter();
-		pr.write("{\"status\":\"200\", \"message\":\"creando actividad\"}");
+		//int id, String nombre, String descp, String color, String fecha, String init, String end, String duracion, String estado, int idCal
+		pr.write(""+postAct(DB.idAct(),nombre_actividad, descripcion_actividad, color_actividad, fecha2, init, end, dur, "En curso", f )+"");
 	}
 
 	/**
@@ -106,9 +120,9 @@ public class Actividades extends HttpServlet {
 		return index;
 	}
 	
-	public String postAct(int id, String nombre, String descp, String color, String fecha, String init, String end, String duracion, String estado, int idCal) {
-		if(DB.regAct(id, nombre, descp, color, fecha, init, end, duracion, estado, idCal)) {
-			return "{\"status\":\"200\", \"message\":\"creando actividad\"}";
+	public String postAct(int id, String nombre, String descp, String color, java.sql.Date fecha2, String init, String end, String duracion, String estado, int idCal) {
+		if(DB.regAct(id, nombre, descp, color, fecha2, init, end, duracion, estado, idCal)==true) {
+			return "{\"status\":\"200\", \"message\":\"creando actividad\",\"IdActividad\":\""+id+"\", \"nombre\":\""+nombre+"\", \"color\":\""+color+"\" }";
 		}else {
 			return "{\"status\":\"500\", \"message\":\"Error, no se creo actividad\"}";
 		}

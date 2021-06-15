@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Properties;
 import propertiesReader.PropertiesReader;
 import java.sql.Connection;
+import java.sql.Date;
 
 
 
@@ -328,7 +330,7 @@ public int idAct() {
 }
 
 //registro de actividad
-public boolean regAct(int id, String nombre, String descp, String color, String fecha, String init, String end, String duracion, String estado, int idCal) {
+public boolean regAct(int id, String nombre, String descp, String color, java.sql.Date fecha, String init, String end, String duracion, String estado, int idCal) {
 	//insert into Usuario values(?,?,?)
 	try {
 		this.pstmt=this.conn.prepareStatement("insert into actividad values(?,?,?,?,?,?,?,?,?,?)");
@@ -336,7 +338,7 @@ public boolean regAct(int id, String nombre, String descp, String color, String 
 		this.pstmt.setString(2, nombre);
 		this.pstmt.setString(3, descp);
 		this.pstmt.setString(4, color);
-		this.pstmt.setString(5, fecha);
+		this.pstmt.setDate(5, fecha);
 		this.pstmt.setString(6, init);
 		this.pstmt.setString(7, end);
 		this.pstmt.setString(8, duracion);

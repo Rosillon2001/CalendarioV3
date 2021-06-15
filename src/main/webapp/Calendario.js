@@ -54,7 +54,7 @@ setInterval(Reloj, 1000);
 //---------------------------------------------------------Envio de datos del calendario mediante fetch post-----------------------------------------------------------------
 var cal=document.getElementById("registro_cal");
 var btn=document.getElementById('boton_cal');
-var act=document.getElementById('actividades');
+
 
 const enviarCal=()=>{
 	var form=new FormData(cal);
@@ -75,7 +75,6 @@ const enviarCal=()=>{
 	).
 	then(datos =>{
 		console.table(datos), 
-		console.log(dataCal),
 		crear(datos);
 	}
 	);
@@ -85,13 +84,14 @@ btn.onclick=enviarCal;
 
 //-----------------------------------------------Crea los div de los calendarios-----------------------------------------------------------------
 var caldiv1=document.getElementById('calends1');
+
 function crear(json){
 	if(json.status==500){
 		window.alert('Un calendario con ese nombre ya existe')
 	}else{
 		var div=document.createElement('div');
 		div.setAttribute('id',json.nombre);
-		div.innerHTML="<a style=color:"+json.color+"><input type='checkbox' class=calendario href=InfoCalendar.html>"+json.nombre+"</a>";	
+		div.innerHTML="<a style=color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</a>";	
 		caldiv1.appendChild(div);
 	}
 }
@@ -106,18 +106,17 @@ var contador=1;
 
 cal.style.display='none';
 btn.style.display='none';
-act.style.display='none';
+
 
 function HideNSeek(){
 	if(contador%2==0){
 		cal.style.display='none';
 		btn.style.display='none';
-		act.style.display='none';
+
 	}
 	else{
 		cal.style.display='';
 		btn.style.display='';
-		act.style.display='';
 		btndel.style.display='none';
 		formdel.style.display='none';
 		updatebtn.style.display='none';
@@ -148,7 +147,6 @@ function HideNSeekDel(){
 		formdel.style.display='';
 		cal.style.display='none';
 		btn.style.display='none';
-		act.style.display='none';
 		updatebtn.style.display='none';
 		formupdate.style.display='none';
 		cerses.style.display='none';
@@ -202,8 +200,7 @@ var form=new FormData(formdel);
 	}		
 	).
 	then(datos =>{
-		console.table(datos), 
-		console.log(dataCal);
+		console.table(datos);
 	}
 	);
 }
@@ -219,7 +216,7 @@ function crearBar(Array=[]){
 			}else{
 				var div=document.createElement('div');
 				div.setAttribute('id',Array[i].nombre);
-				div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario href=InfoCalendar.html>"+Array[i].nombre+"</label>";	
+				div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
 				caldiv1.appendChild(div);
 			}
 		}
@@ -256,7 +253,6 @@ function mostrarCredenciales(){
 		cerses.style.display='';
 		cal.style.display='none';
 		btn.style.display='none';
-		act.style.display='none';
 		btndel.style.display='none';
 		formdel.style.display='none';
 	}
@@ -344,12 +340,34 @@ const enviarAct=()=>{
 	).
 	then(datos =>{
 		console.table(datos), 
+		crearAct(datos),
 		console.log(datos);
 	}
 	);
 
 }
 activitybutton.onclick=enviarAct;
+
+var actdiv1=document.getElementById('activities');
+var actbtn=document.getElementById('act_btn');
+
+function crearAct(json){
+	if(json.status==500){
+		window.alert('Actividad no ha sido creada')
+	}else{
+		var div=document.createElement('div');
+		div.setAttribute('id',json.nombre);
+		div.innerHTML="<a style=color:"+json.color+"><input type='checkbox' class=actividad>"+json.IdActividad+"."+json.nombre+"</a>";	
+		actdiv1.appendChild(div);
+	}
+}
+
+//actbtn.onclick=crearAct;
+
+function eliminar(obj){
+	var div=document.getElementById(`${obj}`);
+	div.remove();
+}
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 window.onload = function() {
