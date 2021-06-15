@@ -74,8 +74,27 @@ public void regUsuario(String query, int id, String username, String pass ) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
 }
+
+//actualizar usuario
+public void modificar( int id, String username, String pass) {
+	try {
+		this.pstmt=conn.prepareStatement("UPDATE Usuario SET nombre_usuario=?,clave=? Where id_usuario="+id);
+		this.pstmt.setString(1, username);
+		this.pstmt.setString(2, pass);
+		this.pstmt.executeUpdate();
+	}	catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			this.stmt.close();
+			this.rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+}
+
 //obtener el id de usuario de la sesion
 public int idSession(String username) {
 	int idUs=0;
@@ -93,7 +112,7 @@ public int idSession(String username) {
 
 //obtener el usuario si esta registrado en la DB
 public String getUsuario(String username) {
-	String user = null; 
+	String user = ""; 
 	PropertiesReader PR= PropertiesReader.getInstances();
 	Properties prop=new Properties();
 	try {
@@ -111,7 +130,7 @@ public String getUsuario(String username) {
 
 //Obtener la clave en la DB para la validacion
 public String getClave(String username) {
-	String pass = null;
+	String pass = "";
 	PropertiesReader PR= PropertiesReader.getInstances();
 	Properties prop=new Properties();
 	try {
@@ -153,7 +172,7 @@ public int idCal() {
 
 
 public String nameCalendar(String calendario) {
-	String cal = null; 
+	String cal =""; 
 	PropertiesReader PR= PropertiesReader.getInstances();
 	Properties prop=new Properties();
 	try {
@@ -220,6 +239,29 @@ public String getCalendars(int idcal) {
 	return AA;
 }
 
+//Obtener el nombre del calendario
+public String getCalendarNames(int idcal) {
+	String AA="";
+	try {
+		this.stmt=this.conn.createStatement();
+		this.rs=this.stmt.executeQuery("SELECT *FROM Calendario where id_calendario="+"'"+ idcal+"'");
+		while(rs.next()) {
+			AA=rs.getString("nombre_calendario");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			this.stmt.close();
+			this.rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	return AA;
+}
+
+
 //metodo para obtener los calendarios de editor
 public String OwnCalendars(int userid) {
 	String idcalendarios = "";
@@ -243,10 +285,10 @@ public String OwnCalendars(int userid) {
 }	
 
 //borrado calendario
-public boolean borrar(String calendar) {
+public boolean borrarCalendar(int idcalendar) {
 	try {
 		this.stmt=this.conn.createStatement();
-		this.stmt.executeQuery("DELETE FROM Calendario Where nombre_calendario="+"'"+calendar+"'");
+		this.stmt.executeQuery("DELETE FROM Calendario Where id_calendario="+"'"+idcalendar+"'");
 		return true;
 	}	catch(SQLException e) {
 		e.printStackTrace();

@@ -89,14 +89,4 @@ public class Login extends HttpServlet {
 		PrintWriter s=resp.getWriter();
 		s.print("<html><body><div id='NombreUsuario'>"+user+"</div></body></html>");
 	}
-	
-	public void elementos( HttpServletResponse response, String usuariosesion) throws IOException {
-		//obtener los calendarios del usuario y pasarlos al front
-				int idsession=DB.idSession(usuariosesion);
-		        System.out.println(CC.calends(idsession));
-		        for(int i=0;i<CC.calends(i).size();i++) {
-		        PrintWriter pr=response.getWriter();
-				pr.print(""+CC.calends(idsession).get(i)+"");
-		        }
-	}
 }

@@ -97,10 +97,14 @@ function crear(json){
 		caldiv1.appendChild(div);
 	}
 }
+function eliminar(json){
+	var div=document.getElementById(`${json.nombre}`);
+	div.remove();
+}
 //--------------------------------------------------Mostrar formulario del calendario------------------------------------------------------------------
 
 var add=document.getElementById('createCal');
-var contador=0;
+var contador=1;
 
 cal.style.display='none';
 btn.style.display='none';
@@ -122,7 +126,7 @@ add.onclick=HideNSeek;
 var btndel=document.getElementById('boton_cal_del');
 var formdel=document.getElementById('eliminar_cal');
 var deletebtn=document.getElementById('eraseCal');
-var contador1=0;
+var contador1=1;
 
 btndel.style.display='none';
 formdel.style.display='none';
@@ -185,13 +189,13 @@ var form=new FormData(formdel);
 	).
 	then(datos =>{
 		console.table(datos), 
-		console.log(dataCal);
+		console.log(dataCal),
+		eliminar(datos);
 	}
 	);
 }
 
 btndel.onclick=deleteCal;
-
 //------------------------------------------------------Contruccion de calendarios (barra lateral)---------------------------------------------------
 var caldiv1=document.getElementById('calends1');
 function crearBar(Array=[]){
@@ -207,7 +211,94 @@ function crearBar(Array=[]){
 	}
 }
 
+
+//-------------------------------------------------------------actualizacion de datos del usuario----------------------------------------------------------------
+var btnUser=document.getElementById('user');
+var formupdate=document.getElementById('modificarUsuario');
+var updatebtn=document.getElementById('usuario_update');
+var contador2=1;
+
+updatebtn.style.display='none';
+formupdate.style.display='none';
+
+function mostrarCredenciales(){
+	
+	if(contador2%2==0){
+		updatebtn.style.display='none';
+		formupdate.style.display='none';
+
+	}
+	else{
+		updatebtn.style.display='';
+		formupdate.style.display='';
+	}
+	
+	contador2++;
+}
+btnUser.onclick=mostrarCredenciales;
+
+const recibirDataUser=()=>{
+
+var options = {
+        method: 'GET',
+        mode: 'cors'
+    };
+
+fetch('ManejoUsuario', options).then(response=>{
+		return response.json();
+	}		
+	).
+	then(datos =>{
+		console.table(datos), 
+		console.log(datos), 
+		credentials (datos);
+	}
+	);
+
+}
+
+const updateUser=()=>{
+var form=new FormData(formupdate);
+	for (var value of form.values()){
+		console.log(value);
+	}
+	
+	const data={
+		method:'PUT',
+		body:form,
+		mode:'cors'
+	};
+	fetch('ManejoUsuario', data).then(response=>{
+		return response.json()
+	}		
+	).
+	then(datos =>{
+		console.table(datos), 
+		alert(data),
+		console.log(dataCal);
+	}
+	);
+}
+
+updatebtn.onclick= function (){
+updateUser();
+window.location="Login.html";
+}
+
+function alert(data){
+	window.alert("Credenciales editadas "+`${data.Username}  ${data.Password}`);
+}
+
+//funcion para mostrar los datos en los campos
+var user=document.getElementById('nombre_usuario');
+var pass=document.getElementById('clave_usuario');
+function credentials (json){
+	user.value=json.Username;
+	//pass.value=json.Password;
+}
+
 window.onload = function() {
+	recibirDataUser();
 	recibirCal();
-  crearBar();
+	crearBar();
 };

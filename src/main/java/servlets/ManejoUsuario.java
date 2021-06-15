@@ -2,10 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -14,27 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controllers.CalendarCreation;
-import helpers.Auth;
 import helpers.ConnectionDB;
+import helpers.Hashing;
 
 /**
- * Servlet implementation class CreateCalendar
+ * Servlet implementation class ManejoUsuario
  */
-@MultipartConfig()
-@WebServlet("/CreateCalendar")
-public class CreateCalendar extends HttpServlet {
-	private static final long serialVersionUID = 3L;
-	CalendarCreation CC=new CalendarCreation();
+@MultipartConfig
+@WebServlet("/ManejoUsuario")
+public class ManejoUsuario extends HttpServlet {
+	private static final long serialVersionUID = 6L;
 	ConnectionDB DB=ConnectionDB.getInstances();
-	Auth auth=new Auth();
+	Hashing hash=new Hashing();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateCalendar() {
+    public ManejoUsuario() {
         super();
         // TODO Auto-generated constructor stub
-        
     }
 
 	/**
@@ -48,9 +43,11 @@ public class CreateCalendar extends HttpServlet {
 		String usuariosesion=(String) session.getAttribute("Usuario");
 		
 		int idsession=DB.idSession(usuariosesion);
+		String clave=DB.getClave(usuariosesion);
+		//String hashClave=hash.getHash(clave);
+		
 	        PrintWriter pr=response.getWriter();
-			pr.print(""+CC.calends(idsession)+"");
-        
+	        pr.print("{\"Username\":\""+usuariosesion+"\",\"Password\":\""+clave+"\"}");
 	}
 
 	/**
@@ -58,38 +55,34 @@ public class CreateCalendar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.setContentType("application/json");
-		
 		HttpSession session=request.getSession();
-		String usuariosesion=(String) session.getAttribute("Usuario");
-		
-		int idsession=DB.idSession(usuariosesion);
-		
-		
-		String nombre_calendario=request.getParameter("nombre_calendario");
-		String color_calendario=request.getParameter("color_calendario");
-		
+		String username=(String) session.getAttribute("Usuario");
+		int iduser=DB.idSession(username);
+		//seobtienen los datos editados
+		String nombre=request.getParameter("nombre_usuario");
+		String pass=request.getParameter("clave_usuario");
+		String hashPass=hash.getHash(pass);
+		DB.modificar(iduser, nombre, hashPass);
 		PrintWriter pr=response.getWriter();
-		if(CC.calExists(nombre_calendario, idsession)==false) {
-			response.addHeader("Access-Control-Allow-Origin: ", "*");
-			pr.print("{\"nombre\":\""+nombre_calendario+"\",\"color\":\""+color_calendario+"\"}");
-			try {
-				CC.RegistrarCalendario(nombre_calendario, color_calendario, idsession);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else {
-			pr.print("{\"status\":\"500\", \"message\":\"calendario con ese nombre existe\"}");
-		}
+		pr.write("{\"status\":\"200\", \"Nombre_Usuario\":\""+nombre+"\"}");
+		System.out.println(nombre+"-"+pass);
 		
-		
-		System.out.println( CC.calExists(nombre_calendario, idsession));
-		
-		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
-		rd.include(request, response);*/
-        
-		
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }

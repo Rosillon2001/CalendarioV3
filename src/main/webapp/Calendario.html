@@ -40,6 +40,7 @@
 	</div>
 	
 	<div id='divFormCalendario'>
+	<!registro de calendarios>
 		<form id="registro_cal">
 			Nombre del Calendario: <br>
 			<input class='form-input' type="text" name='nombre_calendario' id='nombre-cal'><br>
@@ -49,12 +50,27 @@
 			<br>
 		</form>
 		<button class='button' id='boton_cal'>Crear Calendario</button>
-		<form  action='DeleteCalendar' method='delete' id="eliminar_cal">
+	
+	<!eliminacion de calendarios>
+		<form  id="eliminar_cal">
 			Nombre del Calendario a eliminar: <br>
 			<input class='form-input' type="text" name='nombre_calendario-delete' id='nombre-cal-del'><br>
 			<br>
 		</form>
 		<button class='button' id='boton_cal_del'>Eliminar Calendario</button>
+		
+	<!edicion de calendarios>
+	
+	<!edicion de usuario>
+		<form id='modificarUsuario'>
+			Nombre de Usuario:<br>
+			<input class='form-input' type='text' name='nombre_usuario' id='nombre_usuario'><br>
+			<br>
+			Contraseña:<br>
+			<input class='form-input' type='text' name='clave_usuario' id='clave_usuario'><br>
+			<br>
+		</form>
+			<button class='button' id='usuario_update'>Actualizar Datos</button>
 	</div>
 </div>	
 	

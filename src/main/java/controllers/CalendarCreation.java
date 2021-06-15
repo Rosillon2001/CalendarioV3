@@ -44,4 +44,21 @@ public class CalendarCreation {
 		}
 		return cal;
 	}
+	
+	public boolean calExists(String calendario, int userid) {
+		boolean b=true;
+		System.out.println(getCalendar(userid));
+		for(int i=0;i<getCalendar(userid).size();i++) {
+			int idcal=Integer.parseInt( getCalendar(userid).get(i));
+			System.out.println(DB.getCalendarNames(idcal));
+			System.out.println(calendario);
+			if(DB.getCalendarNames(idcal).equals(calendario)) {
+				
+				b=true;
+			}else {
+				b=false;
+			}
+		}
+		return b;
+	}
 }

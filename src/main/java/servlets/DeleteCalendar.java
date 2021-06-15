@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controllers.CalendarDeletion;
+import helpers.ConnectionDB;
 
 /**
  * Servlet implementation class DeleteCalendar
@@ -19,8 +20,9 @@ import controllers.CalendarDeletion;
 @MultipartConfig()
 @WebServlet("/DeleteCalendar")
 public class DeleteCalendar extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5L;
       CalendarDeletion CD=new CalendarDeletion(); 
+      ConnectionDB DB=ConnectionDB.getInstances();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -51,12 +53,15 @@ public class DeleteCalendar extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
+		String usuariosesion=(String) session.getAttribute("Usuario");
+		int idusuario=DB.idSession(usuariosesion);
+		
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin: ", "*");
 		String nombre_calendario=request.getParameter("nombre_calendario-delete");
 		System.out.println(nombre_calendario);
 		PrintWriter pr=response.getWriter();
-		pr.write(CD.deleteCalendar(nombre_calendario));
+		pr.write(CD.deleteCalendar(nombre_calendario,idusuario));
 	}
 
 }
