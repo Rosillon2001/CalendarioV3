@@ -54,6 +54,7 @@ setInterval(Reloj, 1000);
 //---------------------------------------------------------Datos del calendario mediante fetch post-----------------------------------------------------------------
 var cal=document.getElementById("registro_cal");
 var btn=document.getElementById('boton_cal');
+var act=document.getElementById('actividades');
 var dataCal=[];
 var i=0;
 const enviarCal=()=>{
@@ -93,25 +94,38 @@ function crear(json){
 	}else{
 		var div=document.createElement('div');
 		div.setAttribute('id',json.nombre);
-		div.innerHTML="<label style=color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</label>";	
+		div.innerHTML="<a style=color:"+json.color+"><input type='checkbox' class=calendario href=InfoCalendar.html>"+json.nombre+"</a>";	
 		caldiv1.appendChild(div);
 	}
+}
+function eliminar(obj){
+	var div=document.getElementById(`${obj}`);
+	div.remove();
 }
 //--------------------------------------------------Mostrar formulario del calendario------------------------------------------------------------------
 
 var add=document.getElementById('createCal');
-var contador=0;
+var contador=1;
 
 cal.style.display='none';
 btn.style.display='none';
+act.style.display='none';
+
 function HideNSeek(){
 	if(contador%2==0){
 		cal.style.display='none';
 		btn.style.display='none';
+		act.style.display='none';
 	}
 	else{
 		cal.style.display='';
 		btn.style.display='';
+		act.style.display='';
+		btndel.style.display='none';
+		formdel.style.display='none';
+		updatebtn.style.display='none';
+		formupdate.style.display='none';
+		cerses.style.display='none';
 	}
 	
 	contador++;
@@ -122,7 +136,7 @@ add.onclick=HideNSeek;
 var btndel=document.getElementById('boton_cal_del');
 var formdel=document.getElementById('eliminar_cal');
 var deletebtn=document.getElementById('eraseCal');
-var contador1=0;
+var contador1=1;
 
 btndel.style.display='none';
 formdel.style.display='none';
@@ -135,6 +149,12 @@ function HideNSeekDel(){
 	else{
 		btndel.style.display='';
 		formdel.style.display='';
+		cal.style.display='none';
+		btn.style.display='none';
+		act.style.display='none';
+		updatebtn.style.display='none';
+		formupdate.style.display='none';
+		cerses.style.display='none';
 	}
 	
 	contador1++;
@@ -171,12 +191,13 @@ var formdel=document.getElementById('eliminar_cal');
 const deleteCal=()=>{
 var form=new FormData(formdel);
 	for (var value of form.values()){
-		console.log(value);
+		console.log(value), 
+		eliminar(value);
 	}
 	
 	const dataDel={
 		method:'DELETE',
-		body:null,
+		body:form,
 		mode:'cors'
 	};
 	fetch('DeleteCalendar', dataDel).then(response=>{
@@ -191,23 +212,146 @@ var form=new FormData(formdel);
 }
 
 btndel.onclick=deleteCal;
-
 //------------------------------------------------------Contruccion de calendarios (barra lateral)---------------------------------------------------
 var caldiv1=document.getElementById('calends1');
 function crearBar(Array=[]){
-	for(let i=0;i<Array.length;i++){
-		if(!!document.getElementById(`${Array[i].nombre}`)==true){//al momento de refrescar los calendarios, se omitiran la creacion de los ya existentes
-			console.log("ya existe");
-		}else{
-			var div=document.createElement('div');
-			div.setAttribute('id',Array[i].nombre);
-			div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
-			caldiv1.appendChild(div);
+	if(Array.length>0){
+		for(let i=0;i<Array.length;i++){
+			if(!!document.getElementById(`${Array[i].nombre}`)==true){//al momento de refrescar los calendarios, se omitiran la creacion de los ya existentes
+				console.log("ya existe");
+			}else{
+				var div=document.createElement('div');
+				div.setAttribute('id',Array[i].nombre);
+				div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario href=InfoCalendar.html>"+Array[i].nombre+"</label>";	
+				caldiv1.appendChild(div);
+			}
 		}
+	}else{
+		console.log("No hay calendarios asociados a este usuario");
 	}
 }
 
+var act=document.getElementById('actividades');
+const actCal=()=>{
+var form=new FormData(cal);
+	for (var value of form.values()){
+		console.log(value);
+	}
+	
+	const data={
+		method:'POST',
+		body:form,
+		mode:'cors'
+	};
+	fetch('Actividades', data).then(response=>{
+		//return response.json();
+	}	
+	).	
+	then(datos =>{
+		console.table(datos), 
+		console.log(dataCal);
+	}
+	);
+}
+act.onclick=actCal;
+//-------------------------------------------------------------actualizacion de datos del usuario----------------------------------------------------------------
+var btnUser=document.getElementById('user');
+var formupdate=document.getElementById('modificarUsuario');
+var updatebtn=document.getElementById('usuario_update');
+var cerses=document.getElementById('cerrar_sesion');
+var contador2=1;
+
+updatebtn.style.display='none';
+formupdate.style.display='none';
+cerses.style.display='none';
+
+function mostrarCredenciales(){
+	
+	if(contador2%2==0){
+		updatebtn.style.display='none';
+		formupdate.style.display='none';
+		cerses.style.display='none';
+
+	}
+	else{
+		updatebtn.style.display='';
+		formupdate.style.display='';
+		cerses.style.display='';
+		cal.style.display='none';
+		btn.style.display='none';
+		act.style.display='none';
+		btndel.style.display='none';
+		formdel.style.display='none';
+	}
+	
+	contador2++;
+}
+btnUser.onclick=mostrarCredenciales;
+
+const recibirDataUser=()=>{
+
+var options = {
+        method: 'GET',
+        mode: 'cors'
+    };
+
+fetch('ManejoUsuario', options).then(response=>{
+		return response.json();
+	}		
+	).
+	then(datos =>{
+		console.table(datos), 
+		console.log(datos), 
+		credentials (datos);
+	}
+	);
+
+}
+
+const updateUser=()=>{
+var form=new FormData(formupdate);
+	for (var value of form.values()){
+		console.log(value);
+	}
+	
+	const data={
+		method:'PUT',
+		body:form,
+		mode:'cors'
+	};
+	fetch('ManejoUsuario', data).then(response=>{
+		return response.json()
+	}		
+	).
+	then(datos =>{
+		console.table(datos), 
+		console.log(dataCal);
+	}
+	);
+}
+
+updatebtn.onclick= function (){
+updateUser();
+window.location="Login.html";
+}
+
+//-------------------------------------------------------------------------gestion de usuario-----------------------------------------------
+
+//funcion para mostrar los datos en los campos del usuario
+var user=document.getElementById('nombre_usuario');
+var pass=document.getElementById('clave_usuario');
+function credentials (json){
+	user.value=json.Username;
+	//pass.value=json.Password;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
 window.onload = function() {
+	recibirDataUser();
 	recibirCal();
-  crearBar();
+	crearBar();
 };

@@ -55,7 +55,10 @@ public class ManejoUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setContentType("txt/html");
+		cerrarSesion(request);
+		response.sendRedirect("index.html");
+		
 	}
 
 	/**
@@ -83,6 +86,11 @@ public class ManejoUsuario extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	}
+	
+	public void cerrarSesion(HttpServletRequest request ) {
+		HttpSession session=request.getSession();
+		session.invalidate();
 	}
 
 }

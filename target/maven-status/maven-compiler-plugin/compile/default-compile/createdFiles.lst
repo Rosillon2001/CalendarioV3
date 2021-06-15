@@ -6,8 +6,10 @@ servlets\CreateCalendar.class
 helpers\ConnectionDB.class
 servlets\Login.class
 controllers\CalendarCreation.class
+servlets\Actividades.class
 propertiesReader\PropertiesReader.class
 controllers\LoginController.class
 servlets\DeleteCalendar.class
 servlets\Calendar.class
 controllers\CalendarDeletion.class
+servlets\ManejoUsuario.class

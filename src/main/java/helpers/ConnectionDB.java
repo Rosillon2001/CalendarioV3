@@ -187,6 +187,8 @@ public String nameCalendar(String calendario) {
 	
 	return cal;
 }
+
+
 //registro del calendario
 public void regCalendar(int id, String nombre, String color) {
 	//insert into Usuario values(?,?,?)
@@ -303,7 +305,53 @@ public boolean borrarCalendar(int idcalendar) {
 	}
 }
 
+//-------------------------------------------------------gestion de actividades--------------------------------------------------------
+//id de actividad
+public int idAct() {
+		int id=1;
+		try {
+			this.stmt=this.conn.createStatement();
+			this.rs=this.stmt.executeQuery("SELECT MAX(id_actividad) FROM Actividad");
+			while(rs.next()) {
+				id=rs.getInt(1)+1;
+			}
+			}catch(Exception e) {
+			System.out.println("Error"+e.getMessage());	
+			}finally {
+				try {
+					this.stmt.close();
+					this.rs.close();
+				}catch(Exception o){	
+				}
+			}
+		return id;
+}
 
+//registro de actividad
+public boolean regAct(int id, String nombre, String descp, String color, String fecha, String init, String end, String duracion, String estado, int idCal) {
+	//insert into Usuario values(?,?,?)
+	try {
+		this.pstmt=this.conn.prepareStatement("insert into actividad values(?,?,?,?,?,?,?,?,?,?)");
+		this.pstmt.setInt(1, id);
+		this.pstmt.setString(2, nombre);
+		this.pstmt.setString(3, descp);
+		this.pstmt.setString(4, color);
+		this.pstmt.setString(5, fecha);
+		this.pstmt.setString(6, init);
+		this.pstmt.setString(7, end);
+		this.pstmt.setString(8, duracion);
+		this.pstmt.setString(9, estado);
+		this.pstmt.setInt(10, idCal);
+
+		
+		this.pstmt.executeUpdate();
+		return true;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return false;
+	}
+}
 
 //-----------------------------------------------------------CIERRE DE LA CONEXION--------------------------------------------------------------------------------------------
 	//cerrar conexion con la base de datos

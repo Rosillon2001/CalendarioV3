@@ -46,10 +46,11 @@
 			<input class='form-input' type="text" name='nombre_calendario' id='nombre-cal'><br>
 			<br>
 			Color del calendario:<br>
-			<input class='form-input' type="text" name='color_calendario' id='color-cal'><br>
+			<input class='form-input' type="color" name='color_calendario' id='color-cal'><br>
 			<br>
 		</form>
 		<button class='button' id='boton_cal'>Crear Calendario</button>
+		<button class='button' id='actividades'>Actividades</button>
 	
 	<!eliminacion de calendarios>
 		<form  id="eliminar_cal">
@@ -61,7 +62,7 @@
 		
 	<!edicion de calendarios>
 	
-	<!edicion de usuario>
+	<!opciones de usuario>
 		<form id='modificarUsuario'>
 			Nombre de Usuario:<br>
 			<input class='form-input' type='text' name='nombre_usuario' id='nombre_usuario'><br>
@@ -71,6 +72,31 @@
 			<br>
 		</form>
 			<button class='button' id='usuario_update'>Actualizar Datos</button>
+			
+		<form action="ManejoUsuario" method="post">
+			<input type='submit' id='cerrar_sesion' value="Cerrar Sesion">
+		</form>
+		
+	<!creacion de actividades del calendario>
+	<div id='activities'></div>
+		<form id='calend_activity'>
+			Nombre del calendario: <br>
+			<input class='form-input' type='text' name='cal_name' id='cal_name'><br>
+			Nombre de Actividad:<br>
+			<input class='form-input' type='text' name='act_name' id='act_name'><br>
+			Descripcion de la Actividad:<br>
+			<input class='form-input' type='text' name='act_descp' id='act_descp'><br>
+			Color de la Actividad:<br>
+			<input class='form-input' type='color' name='act_color' id='act_color'><br>
+			Fecha de la Actividad:<br>
+			<input class='form-input' type='date' name='act_date' id='act_date'><br>
+			Hora inicio de la Actividad:<br>
+			<input class='form-input' type='time' name='act_init' id='act_init'><br>
+			Hora fin de la Actividad:<br>
+			<input class='form-input' type='time' name='act_end' id='act_end'><br>			
+		</form>
+		<button class='button' id='act_btn'>Crear Actividad</button>
+		
 	</div>
 </div>	
 	

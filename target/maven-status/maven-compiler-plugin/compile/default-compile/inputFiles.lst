@@ -2,6 +2,8 @@ C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\servlets\Login.
 C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\controllers\CalendarDeletion.java
 C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\helpers\ConnectionDB.java
 C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\servlets\Calendar.java
+C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\servlets\Actividades.java
+C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\servlets\ManejoUsuario.java
 C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\helpers\Hashing.java
 C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\controllers\CalendarCreation.java
 C:\Users\rosil\eclipse-workspace2\Calendario_Local\src\main\java\servlets\CreateCalendar.java
