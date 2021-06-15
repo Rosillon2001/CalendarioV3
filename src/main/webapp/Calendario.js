@@ -97,8 +97,8 @@ function crear(json){
 		caldiv1.appendChild(div);
 	}
 }
-function eliminar(json){
-	var div=document.getElementById(`${json.nombre}`);
+function eliminar(obj){
+	var div=document.getElementById(`${obj}`);
 	div.remove();
 }
 //--------------------------------------------------Mostrar formulario del calendario------------------------------------------------------------------
@@ -175,7 +175,8 @@ var formdel=document.getElementById('eliminar_cal');
 const deleteCal=()=>{
 var form=new FormData(formdel);
 	for (var value of form.values()){
-		console.log(value);
+		console.log(value), 
+		eliminar(value);
 	}
 	
 	const dataDel={
@@ -189,8 +190,7 @@ var form=new FormData(formdel);
 	).
 	then(datos =>{
 		console.table(datos), 
-		console.log(dataCal),
-		eliminar(datos);
+		console.log(dataCal);
 	}
 	);
 }
@@ -199,15 +199,19 @@ btndel.onclick=deleteCal;
 //------------------------------------------------------Contruccion de calendarios (barra lateral)---------------------------------------------------
 var caldiv1=document.getElementById('calends1');
 function crearBar(Array=[]){
-	for(let i=0;i<Array.length;i++){
-		if(!!document.getElementById(`${Array[i].nombre}`)==true){//al momento de refrescar los calendarios, se omitiran la creacion de los ya existentes
-			console.log("ya existe");
-		}else{
-			var div=document.createElement('div');
-			div.setAttribute('id',Array[i].nombre);
-			div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
-			caldiv1.appendChild(div);
+	if(Array.length>0){
+		for(let i=0;i<Array.length;i++){
+			if(!!document.getElementById(`${Array[i].nombre}`)==true){//al momento de refrescar los calendarios, se omitiran la creacion de los ya existentes
+				console.log("ya existe");
+			}else{
+				var div=document.createElement('div');
+				div.setAttribute('id',Array[i].nombre);
+				div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
+				caldiv1.appendChild(div);
+			}
 		}
+	}else{
+		console.log("No hay calendarios asociados a este usuario");
 	}
 }
 
@@ -274,7 +278,6 @@ var form=new FormData(formupdate);
 	).
 	then(datos =>{
 		console.table(datos), 
-		alert(),
 		console.log(dataCal);
 	}
 	);
@@ -285,9 +288,7 @@ updateUser();
 window.location="Login.html";
 }
 
-function alert(){
-	window.alert("Credenciales editadas ");
-}
+
 
 //funcion para mostrar los datos en los campos
 var user=document.getElementById('nombre_usuario');

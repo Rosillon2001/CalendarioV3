@@ -21,13 +21,16 @@ public class CalendarCreation {
 	}
 	
 	public ArrayList<String> getCalendar(int userid) {
-		String idCalendarios=DB.OwnCalendars(userid); ArrayList <String> cal=new ArrayList<>();
-		String[] split=idCalendarios.split("-");
-		for (int i=0; i<split.length; i++) {
-			cal.add(split[i]);
-		}
+		if(DB.OwnCalendars(userid).equals("")) {}
+		else {
+			String idCalendarios=DB.OwnCalendars(userid); ArrayList <String> cal=new ArrayList<>();
+			String[] split=idCalendarios.split("-");
+			for (int i=0; i<split.length; i++) {
+				cal.add(split[i]);
+			}
 		return cal;
-	
+		}
+		return null;
 	}
 	
 	public ArrayList<String> calends(int userid) {
@@ -35,11 +38,11 @@ public class CalendarCreation {
 		//ArrayList <String>ids=getCalendar(userid);
 		ArrayList <String> cal=new ArrayList<>();
 		String Calendarios;
-		for(int i=0;i<getCalendar(userid).size();i++) {
-			int idcal=Integer.parseInt(getCalendar(userid).get(i));
-			if(idcal!=0) {
-			Calendarios=DB.getCalendars(idcal); 
-			cal.add(Calendarios);	
+		if(getCalendar(userid)!=null) {
+			for(int i=0;i<getCalendar(userid).size();i++) {
+				int idcal=Integer.parseInt(getCalendar(userid).get(i));
+				Calendarios=DB.getCalendars(idcal); 
+				cal.add(Calendarios);	
 			}
 		}
 		return cal;
@@ -47,16 +50,21 @@ public class CalendarCreation {
 	
 	public boolean calExists(String calendario, int userid) {
 		boolean b=true;
-		System.out.println(getCalendar(userid));
-		for(int i=0;i<getCalendar(userid).size();i++) {
-			int idcal=Integer.parseInt( getCalendar(userid).get(i));
-			System.out.println(DB.getCalendarNames(idcal));
-			System.out.println(calendario);
-			if(DB.getCalendarNames(idcal).equals(calendario)) {
-				
-				b=true;
-			}else {
-				b=false;
+		System.out.println("Calendarios user ->"+getCalendar(userid));
+		if(getCalendar(userid)==null) {
+			return false;
+		}
+		else {
+			for(int i=0;i<getCalendar(userid).size();i++) {
+				int idcal=Integer.parseInt(getCalendar(userid).get(i));
+				System.out.println("calenda"+DB.getCalendarNames(idcal));
+				System.out.println(calendario);
+				if(DB.getCalendarNames(idcal).equals(calendario)) {
+					
+					b=true;
+				}else {
+					b=false;
+				}
 			}
 		}
 		return b;

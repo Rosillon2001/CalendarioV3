@@ -46,10 +46,15 @@ public class CreateCalendar extends HttpServlet {
 		
 		HttpSession session=request.getSession();
 		String usuariosesion=(String) session.getAttribute("Usuario");
-		
 		int idsession=DB.idSession(usuariosesion);
-	        PrintWriter pr=response.getWriter();
+		 PrintWriter pr=response.getWriter();
+		if(CC.getCalendar(idsession)!=null){
 			pr.print(""+CC.calends(idsession)+"");
+		}else {
+			pr.print("{\"status\":\"500\"}");
+		}
+		
+		
         
 	}
 
@@ -84,7 +89,7 @@ public class CreateCalendar extends HttpServlet {
 		}
 		
 		
-		System.out.println( CC.calExists(nombre_calendario, idsession));
+		System.out.println(CC.calExists(nombre_calendario, idsession));
 		
 		/*RequestDispatcher rd=request.getRequestDispatcher("/Calendario.html");
 		rd.include(request, response);*/
