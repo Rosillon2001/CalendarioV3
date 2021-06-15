@@ -15,21 +15,28 @@
 			<span id='date' ></span>
 		</div>
 		<div id='userCont'>
-			<input type='image' id="user"src="images/User.png"></input>
+			<input type='image' id="user"src="images/User.png">
 		</div>
 
 </div>
 
 <div id='pageCont'>
 	<div id="CalenDiv">
-		<div id='MisCal'>Mis Calendarios
+		
+		<div id='MisCal'>
+		<div id='headerMisCal'>
+		<p class='title'>Mis Calendarios</p>
 				<abbr title='Crear un calendario'><input type="image" id='createCal' src='images/add.png'></abbr>
-						<abbr title='Refrescar y mostrar Calendarios'><input type="image" id='refreshCal' src='images/Refresh.png'></abbr>
+				<abbr title='Eliminar Calendarios'><input type="image" id='eraseCal' src='images/Delete.png'></abbr>
+		</div>
 						<form action="CreateCalendar" method='get' id='refresh' style=width:0px;></form>
+		
 					<div id=calends1>
 					</div>
 		</div>
-		<div id='OtherCal'>Calendarios de Invitado</div>
+		<div id='OtherCal'>
+			<p class='title'>Calendarios de Invitado</p>
+		</div>
 	</div>
 	
 	<div id='divFormCalendario'>
@@ -42,6 +49,12 @@
 			<br>
 		</form>
 		<button class='button' id='boton_cal'>Crear Calendario</button>
+		<form  action='DeleteCalendar' method='delete' id="eliminar_cal">
+			Nombre del Calendario a eliminar: <br>
+			<input class='form-input' type="text" name='nombre_calendario-delete' id='nombre-cal-del'><br>
+			<br>
+		</form>
+		<button class='button' id='boton_cal_del'>Eliminar Calendario</button>
 	</div>
 </div>	
 	

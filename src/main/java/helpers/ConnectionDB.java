@@ -243,12 +243,14 @@ public String OwnCalendars(int userid) {
 }	
 
 //borrado calendario
-public void borrar(int I) {
+public boolean borrar(String calendar) {
 	try {
 		this.stmt=this.conn.createStatement();
-		this.rs=this.stmt.executeQuery("DELETE FROM Calendario Where nombre_calendario="+I);
+		this.stmt.executeQuery("DELETE FROM Calendario Where nombre_calendario="+"'"+calendar+"'");
+		return true;
 	}	catch(SQLException e) {
 		e.printStackTrace();
+		return false;
 	}finally {
 		try {
 			this.stmt.close();
@@ -257,7 +259,6 @@ public void borrar(int I) {
 			e.printStackTrace();
 		}
 	}
-	return;
 }
 
 

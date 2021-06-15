@@ -93,7 +93,7 @@ function crear(json){
 	}else{
 		var div=document.createElement('div');
 		div.setAttribute('id',json.nombre);
-		div.innerHTML="<label style=background-color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</label>";	
+		div.innerHTML="<label style=color:"+json.color+"><input type='checkbox' class=calendario >"+json.nombre+"</label>";	
 		caldiv1.appendChild(div);
 	}
 }
@@ -119,6 +119,28 @@ function HideNSeek(){
 add.onclick=HideNSeek;
 
 
+var btndel=document.getElementById('boton_cal_del');
+var formdel=document.getElementById('eliminar_cal');
+var deletebtn=document.getElementById('eraseCal');
+var contador1=0;
+
+btndel.style.display='none';
+formdel.style.display='none';
+
+function HideNSeekDel(){
+	if(contador1%2==0){
+		btndel.style.display='none';
+		formdel.style.display='none';
+	}
+	else{
+		btndel.style.display='';
+		formdel.style.display='';
+	}
+	
+	contador1++;
+}
+deletebtn.onclick=HideNSeekDel;
+
 //-----------------------------------------------------Obtener los calendarios correspondientes a la sesion-----------------------------------------------------
 var ref=document.getElementById('refresh');
 var btnr=document.getElementById('refreshCal');
@@ -143,7 +165,32 @@ fetch('CreateCalendar', options).then(response=>{
 
 }
 
+//-------------------------------------------------------Obtener los datos para la eliminacion del calendario-----------------------------------------------------------
+var formdel=document.getElementById('eliminar_cal');
 
+const deleteCal=()=>{
+var form=new FormData(formdel);
+	for (var value of form.values()){
+		console.log(value);
+	}
+	
+	const dataDel={
+		method:'DELETE',
+		body:form,
+		mode:'cors'
+	};
+	fetch('DeleteCalendar', dataDel).then(response=>{
+		return response.json()
+	}		
+	).
+	then(datos =>{
+		console.table(datos), 
+		console.log(dataCal);
+	}
+	);
+}
+
+btndel.onclick=deleteCal;
 
 //------------------------------------------------------Contruccion de calendarios (barra lateral)---------------------------------------------------
 var caldiv1=document.getElementById('calends1');
@@ -154,7 +201,7 @@ function crearBar(Array=[]){
 		}else{
 			var div=document.createElement('div');
 			div.setAttribute('id',Array[i].nombre);
-			div.innerHTML="<label style=background-color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
+			div.innerHTML="<label style=color:"+Array[i].color+"><input type='checkbox' class=calendario >"+Array[i].nombre+"</label>";	
 			caldiv1.appendChild(div);
 		}
 	}

@@ -14,8 +14,8 @@ CREATE TABLE Acceso (
 	id_usuario numeric(15),
 	id_calendario numeric(50),
 	privilegios varchar(20), 
-	foreign key (id_usuario) references Usuario (id_usuario),
-	foreign key (id_calendario) references Calendario (id_calendario)
+	foreign key (id_usuario) references Usuario (id_usuario) ON DELETE CASCADE AND ON UPDATE CASCADE,
+	foreign key (id_calendario) references Calendario (id_calendario) ON DELETE CASCADE AND ON UPDATE CASCADE
 );
 
 Create table Actividad(
@@ -29,5 +29,5 @@ Create table Actividad(
 	duracion varchar(20),
 	estado varchar(20), 
 	id_calendario numeric(50), 
-	foreign key (id_calendario) references Calendario (id_calendario)
+	foreign key (id_calendario) references Calendario (id_calendario) ON DELETE CASCADE AND ON UPDATE CASCADE
 );

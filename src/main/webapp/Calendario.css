@@ -1,5 +1,7 @@
 @charset "ISO-8859-1";
-
+*{
+	font-style:italic;
+}
 #banner{
 	border-radius:1em;
 	background: linear-gradient(130deg,#fad964, rgb(249, 208, 70), rgb(252, 227, 141), #f2af66); 
@@ -52,7 +54,9 @@
 #CalenDiv{
 	height:100vh;
 	width:250px;
-	background-color:#a5d7d8;
+	background: linear-gradient(130deg,#a8edcd,#a8eddc, #7cdedb, #89ace0, #bc90de, #e87da3); 
+	background-size: 800% 100%;
+    animation: Bg 20s ease infinite;
 	border-radius:5px;
 	border-color:black;
 	border-width:2px;
@@ -75,6 +79,7 @@
     "a b";
     position:relative;
 }
+
 #user{
 	margin-top:20px;
 	margin-right:10px;
@@ -85,19 +90,7 @@
 	cursor:pointer;
 }
 
-#createCal{
-	margin-top:7px;
-	position:relative;
-	width:16px;
-	height:16px;
-}
-#refreshCal{
-	margin-top:7px;
-	position:relative;
-	width:16px;
-	height:16px;
-	margin-left:3px;
-}
+
 #NombreUsuario{
 	font-size:18px;
 	font-style:italic;
@@ -125,6 +118,38 @@
 	border-radius:1em;
 	cursor:pointer;
 }
+.title{
+	font-style:iatlic;
+	font-weight:bold;
+	color:#000000;
+	line-height:auto;
+}
 
-
-
+#headerMisCal{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	
+}
+#createCal{
+	margin-top:7px;
+	position:relative;
+	width:16px;
+	height:16px;
+	margin-left:3px;
+}
+#eraseCal{
+	margin-top:7px;
+	position:relative;
+	width:20x;
+	height:20px;
+	margin-left:3px;
+}
+#calends1{
+	text-align:left;
+	margin-left:30px;
+	font-size:18px;
+	border-radius:5px;
+	background-color:transparent;
+	
+}
