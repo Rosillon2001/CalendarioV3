@@ -274,7 +274,7 @@ var form=new FormData(formupdate);
 	).
 	then(datos =>{
 		console.table(datos), 
-		alert(data),
+		alert(),
 		console.log(dataCal);
 	}
 	);
@@ -285,8 +285,8 @@ updateUser();
 window.location="Login.html";
 }
 
-function alert(data){
-	window.alert("Credenciales editadas "+`${data.Username}  ${data.Password}`);
+function alert(){
+	window.alert("Credenciales editadas ");
 }
 
 //funcion para mostrar los datos en los campos
