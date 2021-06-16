@@ -115,13 +115,14 @@
 	font-style:italic;
 	font-size:24px;
 }
+.form-input{
+	text-align:center;
+}
 .button{
 	height:auto;
 	width:auto;
 	margin: auto;
-	font-style:italic;
-	font-size:18px;
-	border-radius:1em;
+	border-radius:5px;
 	cursor:pointer;
 }
 .title{
@@ -187,4 +188,13 @@
 	position:relative;
 	margin-left:80px;
 	grid-area:c;
+}
+
+#cerrar_sesion{
+	border-radius:5px;
+	background-color:#f5e069;
+}
+#eliminar_cuenta{
+	border-radius:5px;
+	background-color:#ff5757;
 }
