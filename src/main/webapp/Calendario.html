@@ -11,8 +11,10 @@
 <div id="banner">
 	<img src="images/CalendStar.png" class='logo'>	
 		<div id='reloj'>
-			<div id='hora'>	</div>
 			<span id='date' ></span>
+			<div id='hora'>	</div>
+			<img src="images/Sun.png" id='reloj-am'>
+			<img src="images/Luna.png" id='reloj-pm'>
 		</div>
 		<div id='userCont'>
 			<abbr title='Edite su perfil o Cierre sesion' style=width:50px><input type='image' id="user"src="images/User.png"></abbr>
@@ -28,6 +30,7 @@
 		<p class='title'>Mis Calendarios</p>
 				<abbr title='Crear un calendario'><input type="image" id='createCal' src='images/add.png'></abbr>
 				<abbr title='Eliminar Calendarios'><input type="image" id='eraseCal' src='images/Delete.png'></abbr>
+				<abbr title='Añadir actividades'><input type="image" id='actCal' src='images/Actividades.png'></abbr>
 		</div>
 						<form action="CreateCalendar" method='get' id='refresh' style=width:0px;></form>
 		
@@ -42,6 +45,7 @@
 	<div id='divFormCalendario'>
 	<!registro de calendarios>
 		<form id="registro_cal">
+			<h1>Registre un Calendario</h1><br>
 			Nombre del Calendario: <br>
 			<input class='form-input' type="text" name='nombre_calendario' id='nombre-cal'><br>
 			<br>
@@ -54,6 +58,7 @@
 	
 	<!eliminacion de calendarios>
 		<form  id="eliminar_cal">
+		<h1>Elimine un Calendario</h1><br>
 			Nombre del Calendario a eliminar: <br>
 			<input class='form-input' type="text" name='nombre_calendario-delete' id='nombre-cal-del'><br>
 			<br>
@@ -64,6 +69,7 @@
 	
 	<!opciones de usuario>
 		<form id='modificarUsuario'>
+		<h1>Gestione su Usuario</h1><br>
 			Nombre de Usuario:<br>
 			<input class='form-input' type='text' name='nombre_usuario' id='nombre_usuario'><br>
 			<br>
@@ -76,10 +82,14 @@
 		<form action="ManejoUsuario" method="post">
 			<input type='submit' id='cerrar_sesion' value="Cerrar Sesion">
 		</form>
+		<form action="EliminacionCuenta" method="post">
+			<input type='submit' id='eliminar_cuenta' value="Eliminar Cuenta">
+		</form>
 		
 	<!creacion de actividades del calendario>
-	<div id='activities'></div>
-		<form id='calend_activity'>
+	<form id='calend_activity'>
+		<h1>Registre una actividad asociada a un Calendario</h1>
+		<div id='activities'></div>Actividades del usuario:<br><br>
 			Nombre del calendario: <br>
 			<input class='form-input' type='text' name='cal_name' id='cal_name'><br>
 			Nombre de Actividad:<br>

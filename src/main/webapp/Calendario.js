@@ -6,6 +6,8 @@ var username=document.getElementById('NombreUsuario');
 var userdiv=document.getElementById('userCont');
 userdiv.appendChild(username);
 
+var sol=document.getElementById('reloj-am');
+var luna=document.getElementById('reloj-pm');
 //-----------------------------------------------------RELOJ----------------------------------------------------------
 //funcion de creacion del reloj
 function Reloj(){
@@ -32,9 +34,13 @@ let hr=(hora>12) ? hora-12: hora;
 var ampm;
 if(hora>=12 && min>0){
 	ampm='PM';
+	sol.style.display='none';
+	luna.style.display='';
 }
 else{
 	ampm='AM';
+	sol.style.display='';
+	luna.style.display='none';
 }
 if(hr==0){
 	hr=12;
@@ -122,6 +128,10 @@ function HideNSeek(){
 		updatebtn.style.display='none';
 		formupdate.style.display='none';
 		cerses.style.display='none';
+		activityform.style.display='none';
+		activitybutton.style.display='none';
+		actdiv1.style.display='none';
+		deleteuser.style.display='none';
 	}
 	
 	contador++;
@@ -150,6 +160,10 @@ function HideNSeekDel(){
 		updatebtn.style.display='none';
 		formupdate.style.display='none';
 		cerses.style.display='none';
+		activityform.style.display='none';
+		activitybutton.style.display='none';
+		actdiv1.style.display='none';
+		deleteuser.style.display='none';
 	}
 	
 	contador1++;
@@ -233,11 +247,14 @@ var btnUser=document.getElementById('user');
 var formupdate=document.getElementById('modificarUsuario');
 var updatebtn=document.getElementById('usuario_update');
 var cerses=document.getElementById('cerrar_sesion');
+var deleteuser=document.getElementById('eliminar_cuenta');
+
 var contador2=1;
 
 updatebtn.style.display='none';
 formupdate.style.display='none';
 cerses.style.display='none';
+deleteuser.style.display='none';
 
 function mostrarCredenciales(){
 	
@@ -245,16 +262,20 @@ function mostrarCredenciales(){
 		updatebtn.style.display='none';
 		formupdate.style.display='none';
 		cerses.style.display='none';
-
+		deleteuser.style.display='none';
 	}
 	else{
 		updatebtn.style.display='';
 		formupdate.style.display='';
 		cerses.style.display='';
+		deleteuser.style.display='';
 		cal.style.display='none';
 		btn.style.display='none';
 		btndel.style.display='none';
 		formdel.style.display='none';
+		activityform.style.display='none';
+		activitybutton.style.display='none';
+		actdiv1.style.display='none';
 	}
 	
 	contador2++;
@@ -348,8 +369,9 @@ const enviarAct=()=>{
 }
 activitybutton.onclick=enviarAct;
 
+
+//-------------------------------------------------------------------
 var actdiv1=document.getElementById('activities');
-var actbtn=document.getElementById('act_btn');
 
 function crearAct(json){
 	if(json.status==500){
@@ -362,8 +384,46 @@ function crearAct(json){
 	}
 }
 
-//actbtn.onclick=crearAct;
+//ocultar form y botones
+var activityform=document.getElementById('calend_activity');
+var activitybutton=document.getElementById('act_btn');
+var actdiv1=document.getElementById('activities');
+var btnAct=document.getElementById('actCal');
 
+contador3=1;
+
+activityform.style.display='none';
+activitybutton.style.display='none';
+actdiv1.style.display='none';
+
+function HideNSeekAct(){
+	if(contador3%2==0){
+		activityform.style.display='none';
+		activitybutton.style.display='none';
+		actdiv1.style.display='none';
+
+	}
+	else{
+		activityform.style.display='';
+		activitybutton.style.display='';
+		actdiv1.style.display='';
+		updatebtn.style.display='none';
+		formupdate.style.display='none';
+		cerses.style.display='none';
+		cal.style.display='none';
+		btn.style.display='none';
+		btndel.style.display='none';
+		formdel.style.display='none';
+		deleteuser.style.display='none';
+	}
+	
+	contador3++;
+}
+
+btnAct.onclick=HideNSeekAct;
+
+
+//funcion de eliminacion de objetos del DOM
 function eliminar(obj){
 	var div=document.getElementById(`${obj}`);
 	div.remove();

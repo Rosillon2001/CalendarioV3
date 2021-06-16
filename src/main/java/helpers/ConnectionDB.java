@@ -97,6 +97,23 @@ public void modificar( int id, String username, String pass) {
 	}
 }
 
+//eliminar usuario
+public void deleteUser(String username) {
+	try {
+		this.stmt=this.conn.createStatement();
+		this.stmt.executeUpdate("DELETE FROM usuario Where nombre_usuario="+"'"+username+"'");
+		}	catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			this.stmt.close();
+			this.rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+}
+
 //obtener el id de usuario de la sesion
 public int idSession(String username) {
 	int idUs=0;

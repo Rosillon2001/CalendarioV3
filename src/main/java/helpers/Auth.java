@@ -10,7 +10,7 @@ public class Auth {
 	
 	public boolean userExists(String username) {
 		
-		if(DB.getUsuario(username)!=null) {
+		if(DB.getUsuario(username).equals(username)) {
 			return true;
 		}else {
 			return false;

@@ -86,6 +86,7 @@ public class ManejoUsuario extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 	}
 	
 	public void cerrarSesion(HttpServletRequest request ) {

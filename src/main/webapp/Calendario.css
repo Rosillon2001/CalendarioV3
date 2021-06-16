@@ -47,6 +47,10 @@
 	border-radius:3px;
 	box-shadow: 8px 8px 10px;
 	padding:5px;
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-areas:
+    "a b c";
 }
 #pageCont{
 	display:flex;
@@ -64,9 +68,11 @@
 }
 #hora{
 	text-align:center;
+	grid-area:b;
 }
 #date{
 	text-align:center;
+	grid-area:a;
 }
 
 #userCont{
@@ -145,6 +151,13 @@
 	height:20px;
 	margin-left:3px;
 }
+#actCal{
+	margin-top:7px;
+	position:relative;
+	width:20x;
+	height:20px;
+	margin-left:3px;
+}
 #calends1{
 	text-align:left;
 	margin-left:30px;
@@ -157,4 +170,21 @@
 	border-radius:5px;
 	width:100px;
 	height:30px;
+}
+#activities{
+	border-radius:10px;
+}
+#reloj-am{
+	height:50px;
+	width:50px;
+	position:relative;
+	padding-left:20px;
+	grid-area:c;
+}
+#reloj-pm{
+	height:40px;
+	width:40px;
+	position:relative;
+	margin-left:80px;
+	grid-area:c;
 }
